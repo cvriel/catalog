@@ -2,3 +2,5 @@ web:
   build: .
   ports:
     - "8089:80"
+  environment:
+    BASE_URL: "http://api-acc.datapunt.amsterdam.nl/"
