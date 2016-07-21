@@ -26,7 +26,7 @@ node {
 
     stage "Build"
 
-        def image = docker.build("admin.datapunt.amsterdam.nl:5000/datapunt/catalog:${BRANCH}", "web")
+        def image = docker.build("admin.datapunt.amsterdam.nl:5000/datapunt/catalog:${BRANCH}")
         image.push()
 
         if (BRANCH == "master") {
