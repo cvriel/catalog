@@ -42,7 +42,7 @@ node {
         build job: 'Subtask_Openstack_Playbook',
                 parameters: [
                         [$class: 'StringParameterValue', name: 'INVENTORY', value: 'acceptance'],
-                        [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-datapunt-catalog.yml'],
+                        [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-catalog.yml'],
                         [$class: 'StringParameterValue', name: 'BRANCH', value: 'master'],
                 ]
     }
@@ -71,7 +71,7 @@ node {
         build job: 'Subtask_Openstack_Playbook',
                 parameters: [
                         [$class: 'StringParameterValue', name: 'INVENTORY', value: 'production'],
-                        [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-datapunt-catalog.yml'],
+                        [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-catalog.yml'],
                         [$class: 'StringParameterValue', name: 'BRANCH', value: 'master'],
                 ]
     }
