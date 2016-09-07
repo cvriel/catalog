@@ -24,7 +24,7 @@ node {
     }
 
 
-    stage "Build master image"
+    stage("Build develop image") {
         tryStep "build", {
             def image = docker.build("admin.datapunt.amsterdam.nl:5000/datapunt/catalog:${env.BUILD_NUMBER}")
             image.push()
