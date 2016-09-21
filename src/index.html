@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang=nl>
 <head>
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'/>
     <title>DataPunt APIs</title>
 </head>
 <body>
+
 <div class='container'>
 	<h1>REST APIs </h1>
 	<h4>source code: <a href="https://github.com/DatapuntAmsterdam">github.com/DatapuntAmsterdam</a></h4>
@@ -18,6 +19,14 @@
         </tr>
         </thead>
         <tbody>
+
+        <tr>
+            <td>Afvalregels bij locatie x, y</td>
+            <td><a href="%BASE_URL%afvalophaalgebieden/search/">Online API</a></td>
+            <td></td>
+            <td>Publieke Beta</td>
+        </tr>
+
         <tr>
             <td>Basisregistratie Adressen en Gebouwen (BAG)</td>
             <td><a href="%BASE_URL%bag">Online API</a></td>
@@ -30,6 +39,13 @@
             <td><a href="%BASE_URL%gebieden">Online API</a></td>
             <td><a href="swagger/index.html?url=%BASE_URL%bag/docs/api-docs/gebieden">Swagger Documentatie</a></td>
             <td>Publieke RC</td>
+        </tr>
+
+        <tr>
+            <td>Basisbestand Gebieden Amsterdam (BBGA)</td>
+            <td><a href="%BASE_URL%bbga/">Online API</a></td>
+            <td><a href="swagger/index.html?url=%BASE_URL%bbga/docs/api-docs/">Swagger Documentatie</a></td>
+            <td>Publieke Beta</td>
         </tr>
 
         <tr>
@@ -47,10 +63,10 @@
         </tr>
 
         <tr>
-            <td>Registratie Meetbouten</td>
-            <td><a href="%BASE_URL%meetbouten">Online API</a></td>
-            <td><a href="swagger/index.html?url=%BASE_URL%meetbouten/docs/api-docs/meetbouten">Swagger Documentatie</a></td>
-            <td>Publieke RC</td>
+            <td>Locatie bij Postcode huisnummer</td>
+            <td><a href="%BASE_URL%search/postcode/">Online API</a></td>
+            <td><a href="swagger/index.html?url=%BASE_URL%bag/docs/api-docs/search">Swagger Documentatie</a></td>
+            <td>Experimenteel</td>
         </tr>
 
         <tr>
@@ -61,29 +77,17 @@
         </tr>
 
         <tr>
-            <td>Atlas Search</td>
+            <td>Registratie Meetbouten</td>
+            <td><a href="%BASE_URL%meetbouten">Online API</a></td>
+            <td><a href="swagger/index.html?url=%BASE_URL%meetbouten/docs/api-docs/meetbouten">Swagger Documentatie</a></td>
+            <td>Publieke RC</td>
+        </tr>
+
+       <tr>
+            <td>Search/Zoeken</td>
             <td><a href="%BASE_URL%atlas">Online API</a></td>
             <td><a href="swagger/index.html?url=%BASE_URL%bag/docs/api-docs/atlas">Swagger Documentatie</a></td>
             <td>Experimenteel</td>
-        </tr>
-        <tr>
-            <td>Locatie bij Postcode huisnummer</td>
-            <td><a href="%BASE_URL%search/postcode/">Online API</a></td>
-            <td><a href="swagger/index.html?url=%BASE_URL%bag/docs/api-docs/search">Swagger Documentatie</a></td>
-            <td>Experimenteel</td>
-        </tr>
-        <tr>
-            <td>Afvalregels bij locatie x, y</td>
-            <td><a href="%BASE_URL%afvalophaalgebieden/search/">Online API</a></td>
-            <td></td>
-            <td>Publieke Beta</td>
-        </tr>
-
-        <tr>
-            <td>Basisbestand Gebieden Amsterdam (BBGA)</td>
-            <td><a href="%BASE_URL%bbga/">Online API</a></td>
-            <td><a href="swagger/index.html?url=%BASE_URL%bbga/docs/api-docs/">Swagger Documentatie</a></td>
-            <td>Publieke Beta</td>
         </tr>
 
         <tr>
@@ -93,11 +97,12 @@
             <td>Publieke Beta</td>
         </tr>
 
-        <tbody>
+        </tbody>
     </table>
 
     <h1>WMS/WFS Services</h1>
     <table class="table">
+
         <thead>
         <tr>
             <th>Naam</th>
@@ -106,6 +111,7 @@
             <th>Status</th>
         </tr>
         </thead>
+
         <tbody>
         <tr>
             <td>BAG</td>
@@ -113,48 +119,42 @@
             <td><a href="https://map.datapunt.amsterdam.nl/maps/bag?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
             <td>Publieke Beta</td>
         </tr>
-        <tr>
-            <td>Gebieden</td>
-            <td><a href="https://map.datapunt.amsterdam.nl/maps/gebieden?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
-            <td><a href="https://map.datapunt.amsterdam.nl/maps/gebieden?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
-            <td>Publieke Beta</td>
-        </tr>
-        <tr>
-            <td>WKPB</td>
-            <td><a href="https://map.datapunt.amsterdam.nl/maps/wkpb?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
-            <td><a href="https://map.datapunt.amsterdam.nl/maps/wkpb?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
-            <td>Publieke Beta</td>
-        </tr>
-        <tr>
-            <td>NAP</td>
-            <td><a href="https://map.datapunt.amsterdam.nl/maps/nap?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
-            <td><a href="https://map.datapunt.amsterdam.nl/maps/nap?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
-            <td>Publieke Beta</td>
-        </tr>
-        <tr>
-            <td>Meetbouten</td>
-            <td><a href="https://map.datapunt.amsterdam.nl/maps/meetbouten?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
-            <td><a href="https://map.datapunt.amsterdam.nl/maps/meetbouten?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
-            <td>Publieke Beta</td>
-        </tr>
+
         <tr>
             <td>Bodem</td>
             <td><a href="https://map.datapunt.amsterdam.nl/maps/bodem?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
             <td><a href="https://map.datapunt.amsterdam.nl/maps/bodem?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
             <td>Publieke Beta</td>
         </tr>
+
         <tr>
-            <td>Planologische Geluidszones</td>
-            <td><a href="https://map.datapunt.amsterdam.nl/maps/planologischegeluidszones?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
-            <td><a href="https://map.datapunt.amsterdam.nl/maps/planologischegeluidszones?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
+            <td>Gebieden</td>
+            <td><a href="https://map.datapunt.amsterdam.nl/maps/gebieden?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
+            <td><a href="https://map.datapunt.amsterdam.nl/maps/gebieden?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
             <td>Publieke Beta</td>
         </tr>
+
         <tr>
-            <td>Planologische Zones Schiphol</td>
-            <td><a href="https://map.datapunt.amsterdam.nl/maps/planologischezonesschiphol?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
-            <td><a href="https://map.datapunt.amsterdam.nl/maps/planologischezonesschiphol?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
+            <td>Luchtfoto's</td>
+            <td>-</td>
+            <td><a href="https://map.datapunt.amsterdam.nl/maps/lufo?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
             <td>Publieke Beta</td>
         </tr>
+
+        <tr>
+            <td>Meetbouten</td>
+            <td><a href="https://map.datapunt.amsterdam.nl/maps/meetbouten?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
+            <td><a href="https://map.datapunt.amsterdam.nl/maps/meetbouten?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
+            <td>Publieke Beta</td>
+        </tr>
+
+        <tr>
+            <td>NAP</td>
+            <td><a href="https://map.datapunt.amsterdam.nl/maps/nap?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
+            <td><a href="https://map.datapunt.amsterdam.nl/maps/nap?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
+            <td>Publieke Beta</td>
+        </tr>
+
         <tr>
             <td>Parkeervakken</td>
             <td><a href="https://map.datapunt.amsterdam.nl/maps/parkeervakken?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
@@ -163,9 +163,30 @@
         </tr>
 
         <tr>
-            <td>Luchtfoto's</td>
-            <td>-</td>
-            <td><a href="https://map.datapunt.amsterdam.nl/maps/lufo?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
+            <td>Planologische Geluidszones</td>
+            <td><a href="https://map.datapunt.amsterdam.nl/maps/planologischegeluidszones?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
+            <td><a href="https://map.datapunt.amsterdam.nl/maps/planologischegeluidszones?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
+            <td>Publieke Beta</td>
+        </tr>
+
+        <tr>
+            <td>Planologische Zones Schiphol</td>
+            <td><a href="https://map.datapunt.amsterdam.nl/maps/planologischezonesschiphol?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
+            <td><a href="https://map.datapunt.amsterdam.nl/maps/planologischezonesschiphol?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
+            <td>Publieke Beta</td>
+        </tr>
+
+	<tr>
+            <td>Topografie</td>
+            <td><a href="https://map.datapunt.amsterdam.nl/maps/topografie?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
+            <td><a href="https://map.datapunt.amsterdam.nl/maps/topografie?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
+            <td>Publieke Beta</td>
+        </tr>
+
+        <tr>
+            <td>WKPB</td>
+            <td><a href="https://map.datapunt.amsterdam.nl/maps/wkpb?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
+            <td><a href="https://map.datapunt.amsterdam.nl/maps/wkpb?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
             <td>Publieke Beta</td>
         </tr>
 
