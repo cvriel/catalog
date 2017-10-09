@@ -78,6 +78,9 @@ window.onload = function() {
   const ui = SwaggerUIBundle({
     oauth2RedirectUrl: scheme + host + port + "/api/swagger/oauth2-redirect.html",
     dom_id: '#swagger-ui',
+    validatorUrl: null,
+    docExpansion: 'list',
+    jsonEditor: true,
     deepLinking: true,
     presets: [
       SwaggerUIBundle.presets.apis,
