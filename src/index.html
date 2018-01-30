@@ -2,7 +2,7 @@
 <html lang=nl>
 <head>
     <link rel="stylesheet" href="https://fast.fonts.net/cssapi/3680cf49-2b05-4b8a-af28-fa9e27d2bed0.css">
-    <title>API's en Geoservices - Dataportaal</title>
+    <title>API's en Geo-webservices</title>
     <style>
         html, body {
             height: 100%;
@@ -108,13 +108,13 @@
         </a>
     </div>
 
-    <h1>REST API's </h1>
-    <h2>Dit overzicht van browsable interfaces en openAPI documentatie beperkt zich tot de API's en services
+    <h1>RESTful API</h1>
+    Dit overzicht van browsable interfaces en openAPI documentatie beperkt zich tot de API's
 	ontwikkeld door programma DataPunt van Onderzoek, Informatie en Statistiek.
-	API's en services van andere partijen vind je in de
+	API's van andere partijen vind je in de
 	<a href="https://data.amsterdam.nl/#?dsd=catalogus&dsp=1&dsv=CARDS&mpb=topografie&mpz=11&mpv=52.3731081:4.8932945">datasetcatalogus</a>.
 	<br/><br/>Instructies, bijv. over omgaan met autorisatie, vind je op de helppagina over
-	<a href="https://data.amsterdam.nl/#?mpb=topografie&pgn=content-overzicht&pgt=apis">API's gebruiken</a>.</h2>
+	<a href="https://data.amsterdam.nl/#?mpb=topografie&pgn=content-overzicht&pgt=apis">API's gebruiken</a>.
 
     <table class="table" cellspacing="0" cellpadding="0">
         <thead>
@@ -311,8 +311,9 @@
         </tbody>
     </table>
 
-    <h1>WMS/WFS Services</h1>
-    <h2>Te gebruiken met Geo-Spatial Applications (GIS) o.a. met open source: <a href="http://www.qgis.org/" target="_blank" rel="noopener">qgis.org</a>.</h2>
+    <h1>Geo-webservices</h1>
+    Geografische webservices conform de OGC richtlijnen (WMS en WFS).
+    Deze zijn te gebruiken met webclients als Leaflet en Open Layers of met software voor ruimtelijke data, zoals <a href="http://www.qgis.org/" target="_blank" rel="noopener">QGIS</a>.
     <table class="table" cellspacing="0" cellpadding="0">
         <thead>
             <tr>
@@ -327,8 +328,8 @@
 
             <tr>
                 <td>BAG</td>
-                <td><a href="https://map.data.amsterdam.nl/maps/bag?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td><a href="https://map.data.amsterdam.nl/maps/bag?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
+                <td><a href="https://map.data.amsterdam.nl/maps/bag?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td>Live</td>
                 <td><a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/"><img
                     src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31" alt="CC0"/></a></td>
@@ -336,8 +337,8 @@
 
             <tr>
                 <td>BRK</td>
-                <td><a href="https://map.data.amsterdam.nl/maps/brk?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td><a href="https://map.data.amsterdam.nl/maps/brk?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
+                <td><a href="https://map.data.amsterdam.nl/maps/brk?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td>Live</td>
                 <td><a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/"><img
                     src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31" alt="CC0"/></a></td>
@@ -345,24 +346,24 @@
 
             <tr>
                 <td>Bodem</td>
-                <td><a href="https://map.data.amsterdam.nl/maps/bodem?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td><a href="https://map.data.amsterdam.nl/maps/bodem?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
+                <td><a href="https://map.data.amsterdam.nl/maps/bodem?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td>Live</td>
                 <td><a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/"><img
                     src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31" alt="CC0"/></a></td>
             </tr>
             <tr>
                 <td>Gebieden</td>
-                <td><a href="https://map.data.amsterdam.nl/maps/gebieden?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td><a href="https://map.data.amsterdam.nl/maps/gebieden?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
+                <td><a href="https://map.data.amsterdam.nl/maps/gebieden?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td>Live</td>
                 <td><a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/"><img
                     src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31" alt="CC0"/></a></td>
             </tr>
             <tr>
                 <td>Grondexploitatie</td>
-                <td><a href="https://map.data.amsterdam.nl/maps/grondexploitatie?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td><a href="https://map.data.amsterdam.nl/maps/grondexploitatie?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
+                <td><a href="https://map.data.amsterdam.nl/maps/grondexploitatie?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td>Alleen bereikbaar binnen de gemeente</td>
                 <td><a rel="license" href="https://creativecommons.org/licenses/by/4.0/"><img
                         alt="Creative Commons License"
@@ -370,8 +371,8 @@
             </tr>
             <tr>
                 <td>Handelsregister</td>
-                <td><a href="https://map.data.amsterdam.nl/maps/handelsregister?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td><a href="https://map.data.amsterdam.nl/maps/handelsregister?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
+                <td><a href="https://map.data.amsterdam.nl/maps/handelsregister?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td>Alleen bereikbaar binnen de gemeente</td>
                 <td><a rel="license" href="https://creativecommons.org/licenses/by/4.0/"><img
                         alt="Creative Commons License"
@@ -379,32 +380,32 @@
             </tr>
             <tr>
                 <td>Luchtfoto's</td>
-                <td>-</td>
                 <td><a href="https://map.data.amsterdam.nl/maps/lufo?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
+                <td>-</td>
                 <td>Live</td>
                 <td><a rel="license" href="https://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License"
                      src="https://i.creativecommons.org/l/by/4.0/88x31.png" width="88" height="31"/></a></td>
             </tr>
             <tr>
                 <td>Meetbouten</td>
-                <td><a href="https://map.data.amsterdam.nl/maps/meetbouten?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td><a href="https://map.data.amsterdam.nl/maps/meetbouten?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
+                <td><a href="https://map.data.amsterdam.nl/maps/meetbouten?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td>Live</td>
                 <td><a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/"><img
                     src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31" alt="CC0"/></a></td>
             </tr>
             <tr>
                 <td>Monumenten</td>
-                <td><a href="https://map.data.amsterdam.nl/maps/monumenten?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td><a href="https://map.data.amsterdam.nl/maps/monumenten?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
+                <td><a href="https://map.data.amsterdam.nl/maps/monumenten?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td>Live</td>
                 <td><a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/"><img
                     src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31" alt="CC0"/></a></td>
             </tr>
             <tr>
                 <td>NAP</td>
-                <td><a href="https://map.data.amsterdam.nl/maps/nap?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td><a href="https://map.data.amsterdam.nl/maps/nap?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
+                <td><a href="https://map.data.amsterdam.nl/maps/nap?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td>Live</td>
                 <td><a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/"><img
                     src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31" alt="CC0"/></a></td>
@@ -412,19 +413,17 @@
 
             <tr>
                 <td>Overlastgebieden</td>
-                <td><a href="https://map.data.amsterdam.nl/maps/overlastgebieden?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td><a href="https://map.data.amsterdam.nl/maps/overlastgebieden?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
+                <td><a href="https://map.data.amsterdam.nl/maps/overlastgebieden?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td>Live</td>
                 <td><a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/"><img src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31"
                          alt="CC0"/></a></td>
             </tr>
 
-
-
             <tr>
-                <td>Panorama</td>
-                <td><a href="https://map.data.amsterdam.nl/maps/panorama?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
+                <td>Panoramabeelden</td>
                 <td><a href="https://map.data.amsterdam.nl/maps/panorama?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
+                <td><a href="https://map.data.amsterdam.nl/maps/panorama?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td>Live</td>
                 <td><a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/"><img src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31"
                          alt="CC0"/></a></td>
@@ -432,8 +431,8 @@
 
             <tr>
                 <td>Parkeervakken</td>
-                <td><a href="https://map.data.amsterdam.nl/maps/parkeervakken?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td><a href="https://map.data.amsterdam.nl/maps/parkeervakken?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
+                <td><a href="https://map.data.amsterdam.nl/maps/parkeervakken?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td>Live</td>
                 <td><a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/"><img
                     src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31" alt="CC0"/></a></td>
@@ -441,8 +440,8 @@
 
             <tr>
                 <td>Parkeervakken</td>
-                <td><a href="https://map.data.amsterdam.nl/maps/predictiveparking?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td><a href="https://map.data.amsterdam.nl/maps/predictiveparking?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
+                <td><a href="https://map.data.amsterdam.nl/maps/predictiveparking?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td>Live (binnen gemeente)</td>
                 <td><a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/"><img
                     src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31" alt="CC0"/></a></td>
@@ -450,46 +449,46 @@
 
             <tr>
                 <td>Planologische Geluidszones</td>
-                <td><a href="https://map.data.amsterdam.nl/maps/planologischegeluidszones?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td><a href="https://map.data.amsterdam.nl/maps/planologischegeluidszones?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
+                <td><a href="https://map.data.amsterdam.nl/maps/planologischegeluidszones?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td>Live</td>
                 <td><a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/"><img src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31"
                      alt="CC0"/></a></td>
             </tr>
             <tr>
                 <td>Planologische Zones Schiphol</td>
-                <td><a href="https://map.data.amsterdam.nl/maps/planologischezonesschiphol?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td><a href="https://map.data.amsterdam.nl/maps/planologischezonesschiphol?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
+                <td><a href="https://map.data.amsterdam.nl/maps/planologischezonesschiphol?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td>Live</td>
                 <td><a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/"><img src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31"
                      alt="CC0"/></a></td>
             </tr>
             <tr>
                 <td>Topografie<br><ul><li>BGT</li><li>KBK10</li><li>KBK50</li></ul></td>
-                <td valign="top"><a href="https://map.data.amsterdam.nl/maps/topografie?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a><br><br>
-                    <a href="https://map.data.amsterdam.nl/maps/bgtobjecten?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a><br><br>
                 </td>
                 <td valign="top"><a href="https://map.data.amsterdam.nl/maps/topografie?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a><br><br>
                     <a href="https://map.data.amsterdam.nl/maps/bgt?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a><br>
                     <a href="https://map.data.amsterdam.nl/maps/kbk10?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a><br>
                     <a href="https://map.data.amsterdam.nl/maps/kbk50?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a>
                 </td>
+                <td valign="top">&nbsp;<br><br>
+                    <a href="https://map.data.amsterdam.nl/maps/bgtobjecten?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a><br><br>
                 <td>Live</td>
                 <td><a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/"><img
                     src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31" alt="CC0"/></a></td>
             </tr>
             <tr>
                 <td>WKPB</td>
-                <td><a href="https://map.data.amsterdam.nl/maps/wkpb?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td><a href="https://map.data.amsterdam.nl/maps/wkpb?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
+                <td><a href="https://map.data.amsterdam.nl/maps/wkpb?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td>Live</td>
                 <td><a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/"><img src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31"
                      alt="CC0"/></a></td>
             </tr>
             <tr>
                 <td>Tellus</td>
-                <td><a href="https://map.data.amsterdam.nl/maps/tellussen?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td><a href="https://map.data.amsterdam.nl/maps/tellussen?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a></td>
+                <td><a href="https://map.data.amsterdam.nl/maps/tellussen?REQUEST=GetCapabilities&SERVICE=wfs">WFS</a></td>
                 <td>Live</td>
                 <td><a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/"><img src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31"
                      alt="CC0"/></a></td>
@@ -498,7 +497,8 @@
     </table>
 
     <h1>Map Tile Services</h1>
-    <h2>Te gebruiken als achtergrondtegels. Gebruik t1 t/m t4 voor browser multi-fetch.</h2>
+    Map Tile services conform de OGC richtlijnen (WMTS), te gebruiken met software voor ruimtelijke data, zoals <a href="http://www.qgis.org/" target="_blank" rel="noopener">QGIS</a>.
+    Of de tiles zijn te gebruiken in webclients, zoals Leaflet en OpenLayers. Daarvoor zijn url's t1 t/m t4 beschikbaar voor browser multi-fetch.
     <table class="table" cellspacing="0" cellpadding="0">
         <thead>
             <tr>
@@ -512,67 +512,83 @@
         </thead>
         <tbody>
             <tr>
-                <td>Topografie standaard</td>
-                <td><a href="https://t1.data.amsterdam.nl/topo_rd/15/15137/17281.png">TMS</a></td>
-                <td>Rijksdriehoek / 5-16</td>
+                <td>Topografie, standaard visualisatie</td>
+                <td><a href="https://map.data.amsterdam.nl/service?REQUEST=GetCapabilities&SERVICE=WMTS">WMTS</a><br>
+                    <a href="https://t1.data.amsterdam.nl/topo_rd/15/15137/17281.png">Tiles</a></td>
+                <td>Rijksdriehoekstelsel (5-16)</td>
                 <td>Raster</td>
                 <td>Live</td>
                 <td><a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/"><img
                 src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31" alt="CC0"/></a></td>
             </tr>
             <tr>
-                <td>Topografie licht (minder contrast)</td>
-                <td><a href="https://t1.data.amsterdam.nl/topo_rd_light/15/15137/17281.png">TMS</a></td>
-                <td>Rijksdriehoek / 5-16</td>
+                <td>Topografie, light visualisatie)</td>
+                <td><a href="https://map.data.amsterdam.nl/service?REQUEST=GetCapabilities&SERVICE=WMTS">WMTS</a><br>
+                    <a href="https://t1.data.amsterdam.nl/topo_rd_light/15/15137/17281.png">Tiles</a></td>
+                <td>Rijksdriehoekstelsel (5-16)</td>
                 <td>Raster</td>
                 <td>Live</td>
                 <td><a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/"><img
                 src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31" alt="CC0"/></a></td>
             </tr>
             <tr>
-                <td>Topografie zwart-wit</td>
-                <td><a href="https://t1.data.amsterdam.nl/topo_rd_zw/15/15137/17281.png">TMS</a></td>
-                <td>Rijksdriehoek / 5-16</td>
+                <td>Topografie, zwart-wit visualisatie</td>
+                <td><a href="https://map.data.amsterdam.nl/service?REQUEST=GetCapabilities&SERVICE=WMTS">WMTS</a><br>
+                    <a href="https://t1.data.amsterdam.nl/topo_rd_zw/15/15137/17281.png">TMS</a></td>
+                <td>Rijksdriehoekstelsel (5-16)</td>
                 <td>Raster</td>
                 <td>Live</td>
                 <td><a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/"><img
                 src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31" alt="CC0"/></a></td>
             </tr>
             <tr>
-                <td>Topografie standaard</td>
-                <td><a href="https://t1.data.amsterdam.nl/topo_wm/18/134599/86112.png">XYZ</a></td>
-                <td>Webmercator/Google / 11-21</td>
+                <td>Topografie, standaard visualisatie</td>
+                <td><a href="https://map.data.amsterdam.nl/service?REQUEST=GetCapabilities&SERVICE=WMTS">WMTS</a><br>
+                    <a href="https://t1.data.amsterdam.nl/topo_wm/18/134599/86112.png">XYZ</a></td>
+                <td>Webmercator/Google (11-21)</td>
                 <td>Raster</td>
                 <td>Live</td>
                 <td><a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/"><img
                 src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31" alt="CC0"/></a></td>
             </tr>
             <tr>
-                <td>Topografie licht (minder contrast)</td>
-                <td><a href="https://t1.data.amsterdam.nl/topo_wm_light/18/134599/86112.png">XYZ</a></td>
-                <td>Webmercator/Google / 11-21</td>
+                <td>Topografie, light visualisatie</td>
+                <td><a href="https://map.data.amsterdam.nl/service?REQUEST=GetCapabilities&SERVICE=WMTS">WMTS</a><br>
+                    <a href="https://t1.data.amsterdam.nl/topo_wm_light/18/134599/86112.png">XYZ</a></td>
+                <td>Webmercator/Google (11-21)</td>
                 <td>Raster</td>
                 <td>Live</td>
                 <td><a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/"><img
                 src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31" alt="CC0"/></a></td>
             </tr>
             <tr>
-                <td>Topografie zwart-wit</td>
-                <td><a href="https://t1.data.amsterdam.nl/topo_wm_zw/18/134599/86112.png">XYZ</a></td>
-                <td>Webmercator/Google / 11-21</td>
+                <td>Topografie, zwart-wit visualisatie</td>
+                <td><a href="https://map.data.amsterdam.nl/service?REQUEST=GetCapabilities&SERVICE=WMTS">WMTS</a><br>
+                    <a href="https://t1.data.amsterdam.nl/topo_wm_zw/18/134599/86112.png">XYZ</a></td>
+                <td>Webmercator/Google (11-21)</td>
                 <td>Raster</td>
                 <td>Live</td>
                 <td><a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/"><img
                     src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31" alt="CC0"/></a></td>
             </tr>
             <tr>
-                <td>Topografie standaard</td>
+                <td>Topografie, vectortiles </td>
                 <td><a href="https://t1.data.amsterdam.nl/wm/12/2103/1345.pbf">XYZ</a></td>
-                <td>Webmercator/Google / 8-20</td>
+                <td>Webmercator/Google (8-20)</td>
                 <td>Vector</td>
                 <td>Live</td>
                 <td><a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/"><img
                     src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31" alt="CC0"/></a></td>
+            </tr>
+            <tr>
+                <td>Luchtfoto</td>
+                <td><a href="https://map.data.amsterdam.nl/service?REQUEST=GetCapabilities&SERVICE=WMTS">WMTS</a><br>
+                    <a href="https://t1.data.amsterdam.nl/lufo2017_rd/15/15137/17281.png">Tiles</a></td>
+                <td>Rijksdriehoekstelsel (5-16)</td>
+                <td>Raster</td>
+                <td>Live</td>
+                <td><a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/"><img
+                        src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31" alt="CC0"/></a></td>
             </tr>
         </tbody>
     </table>
