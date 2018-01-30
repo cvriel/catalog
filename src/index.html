@@ -109,12 +109,12 @@
     </div>
 
     <h1>RESTful API</h1>
-    Dit overzicht van browsable interfaces en openAPI documentatie beperkt zich tot de API's
+    <p>Dit overzicht van browsable interfaces en openAPI documentatie beperkt zich tot de API's
 	ontwikkeld door programma DataPunt van Onderzoek, Informatie en Statistiek.
 	API's van andere partijen vind je in de
 	<a href="https://data.amsterdam.nl/#?dsd=catalogus&dsp=1&dsv=CARDS&mpb=topografie&mpz=11&mpv=52.3731081:4.8932945">datasetcatalogus</a>.
 	<br/><br/>Instructies, bijv. over omgaan met autorisatie, vind je op de helppagina over
-	<a href="https://data.amsterdam.nl/#?mpb=topografie&pgn=content-overzicht&pgt=apis">API's gebruiken</a>.
+        <a href="https://data.amsterdam.nl/#?mpb=topografie&pgn=content-overzicht&pgt=apis">API's gebruiken</a>.<br></p>
 
     <table class="table" cellspacing="0" cellpadding="0">
         <thead>
@@ -185,7 +185,7 @@
             </tr>
             <tr>
                 <td>Geosearch</td>
-                <td></a></td>
+                <td>nbsp;</td>
                 <td><a href="/api/swagger/?url=/geosearch/docs/geosearch.yml">OpenAPI Documentatie</a></td>
                 <td>Live</td>
                 <td><a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/"><img
@@ -312,8 +312,8 @@
     </table>
 
     <h1>Geo-webservices</h1>
-    Geografische webservices conform de OGC richtlijnen (WMS en WFS).
-    Deze zijn te gebruiken met webclients als Leaflet en Open Layers of met software voor ruimtelijke data, zoals <a href="http://www.qgis.org/" target="_blank" rel="noopener">QGIS</a>.
+    <p>Geografische webservices conform de OGC richtlijnen (WMS en WFS).
+        Deze zijn te gebruiken met webclients als Leaflet en Open Layers of met software voor ruimtelijke data, zoals <a href="http://www.qgis.org/" target="_blank" rel="noopener">QGIS</a>.<br></p>
     <table class="table" cellspacing="0" cellpadding="0">
         <thead>
             <tr>
@@ -465,7 +465,6 @@
             </tr>
             <tr>
                 <td>Topografie<br><ul><li>BGT</li><li>KBK10</li><li>KBK50</li></ul></td>
-                </td>
                 <td valign="top"><a href="https://map.data.amsterdam.nl/maps/topografie?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a><br><br>
                     <a href="https://map.data.amsterdam.nl/maps/bgt?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a><br>
                     <a href="https://map.data.amsterdam.nl/maps/kbk10?REQUEST=GetCapabilities&VERSION=1.1.0&SERVICE=wms">WMS</a><br>
@@ -497,14 +496,14 @@
     </table>
 
     <h1>Map Tile Services</h1>
-    Map Tile services conform de OGC richtlijnen (WMTS), te gebruiken met software voor ruimtelijke data, zoals <a href="http://www.qgis.org/" target="_blank" rel="noopener">QGIS</a>.
-    Of de tiles zijn te gebruiken in webclients, zoals Leaflet en OpenLayers. Daarvoor zijn url's t1 t/m t4 beschikbaar voor browser multi-fetch.
+    <p>Map Tile services conform de OGC richtlijnen (WMTS), te gebruiken met software voor ruimtelijke data, zoals <a href="http://www.qgis.org/" target="_blank" rel="noopener">QGIS</a>.
+        Of de tiles zijn te gebruiken in webclients, zoals Leaflet en OpenLayers. Daarvoor zijn url's t1 t/m t4 beschikbaar voor browser multi-fetch.</p>
     <table class="table" cellspacing="0" cellpadding="0">
         <thead>
             <tr>
                 <th class="column1">Naam</th>
                 <th class="column2"></th>
-                <th class="column3">Coordinatenstelsel / Niveaus</th>
+                <th class="column3">Coordinatenstelsel (Niveaus)</th>
                 <th class="column4">Type</th>
                 <th class="column5">Status</th>
                 <th class="column6">Licentie</th>
@@ -512,7 +511,7 @@
         </thead>
         <tbody>
             <tr>
-                <td>Topografie, standaard visualisatie</td>
+                <td>Topografie, standaard visualisatie (RD)</td>
                 <td><a href="https://map.data.amsterdam.nl/service?REQUEST=GetCapabilities&SERVICE=WMTS">WMTS</a><br>
                     <a href="https://t1.data.amsterdam.nl/topo_rd/15/15137/17281.png">Tiles</a></td>
                 <td>Rijksdriehoekstelsel (5-16)</td>
@@ -522,7 +521,7 @@
                 src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31" alt="CC0"/></a></td>
             </tr>
             <tr>
-                <td>Topografie, light visualisatie)</td>
+                <td>Topografie, light visualisatie (RD)</td>
                 <td><a href="https://map.data.amsterdam.nl/service?REQUEST=GetCapabilities&SERVICE=WMTS">WMTS</a><br>
                     <a href="https://t1.data.amsterdam.nl/topo_rd_light/15/15137/17281.png">Tiles</a></td>
                 <td>Rijksdriehoekstelsel (5-16)</td>
@@ -532,9 +531,9 @@
                 src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31" alt="CC0"/></a></td>
             </tr>
             <tr>
-                <td>Topografie, zwart-wit visualisatie</td>
+                <td>Topografie, zwart-wit visualisatie(RD)</td>
                 <td><a href="https://map.data.amsterdam.nl/service?REQUEST=GetCapabilities&SERVICE=WMTS">WMTS</a><br>
-                    <a href="https://t1.data.amsterdam.nl/topo_rd_zw/15/15137/17281.png">TMS</a></td>
+                    <a href="https://t1.data.amsterdam.nl/topo_rd_zw/15/15137/17281.png">Tiles</a></td>
                 <td>Rijksdriehoekstelsel (5-16)</td>
                 <td>Raster</td>
                 <td>Live</td>
@@ -542,9 +541,9 @@
                 src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31" alt="CC0"/></a></td>
             </tr>
             <tr>
-                <td>Topografie, standaard visualisatie</td>
+                <td>Topografie, standaard visualisatie (WM)</td>
                 <td><a href="https://map.data.amsterdam.nl/service?REQUEST=GetCapabilities&SERVICE=WMTS">WMTS</a><br>
-                    <a href="https://t1.data.amsterdam.nl/topo_wm/18/134599/86112.png">XYZ</a></td>
+                    <a href="https://t1.data.amsterdam.nl/topo_wm/18/134599/86112.png">Tiles</a></td>
                 <td>Webmercator/Google (11-21)</td>
                 <td>Raster</td>
                 <td>Live</td>
@@ -552,9 +551,9 @@
                 src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31" alt="CC0"/></a></td>
             </tr>
             <tr>
-                <td>Topografie, light visualisatie</td>
+                <td>Topografie, light visualisatie (WM)</td>
                 <td><a href="https://map.data.amsterdam.nl/service?REQUEST=GetCapabilities&SERVICE=WMTS">WMTS</a><br>
-                    <a href="https://t1.data.amsterdam.nl/topo_wm_light/18/134599/86112.png">XYZ</a></td>
+                    <a href="https://t1.data.amsterdam.nl/topo_wm_light/18/134599/86112.png">Tiles</a></td>
                 <td>Webmercator/Google (11-21)</td>
                 <td>Raster</td>
                 <td>Live</td>
@@ -562,9 +561,9 @@
                 src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31" alt="CC0"/></a></td>
             </tr>
             <tr>
-                <td>Topografie, zwart-wit visualisatie</td>
+                <td>Topografie, zwart-wit visualisatie(WM)</td>
                 <td><a href="https://map.data.amsterdam.nl/service?REQUEST=GetCapabilities&SERVICE=WMTS">WMTS</a><br>
-                    <a href="https://t1.data.amsterdam.nl/topo_wm_zw/18/134599/86112.png">XYZ</a></td>
+                    <a href="https://t1.data.amsterdam.nl/topo_wm_zw/18/134599/86112.png">Tiles</a></td>
                 <td>Webmercator/Google (11-21)</td>
                 <td>Raster</td>
                 <td>Live</td>
@@ -572,8 +571,8 @@
                     src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31" alt="CC0"/></a></td>
             </tr>
             <tr>
-                <td>Topografie, vectortiles </td>
-                <td><a href="https://t1.data.amsterdam.nl/wm/12/2103/1345.pbf">XYZ</a></td>
+                <td>Topografie, vectortiles</td>
+                <td><a href="https://t1.data.amsterdam.nl/wm/12/2103/1345.pbf">Tiles</a></td>
                 <td>Webmercator/Google (8-20)</td>
                 <td>Vector</td>
                 <td>Live</td>
@@ -581,7 +580,7 @@
                     src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31" alt="CC0"/></a></td>
             </tr>
             <tr>
-                <td>Luchtfoto</td>
+                <td>Luchtfoto (RD)</td>
                 <td><a href="https://map.data.amsterdam.nl/service?REQUEST=GetCapabilities&SERVICE=WMTS">WMTS</a><br>
                     <a href="https://t1.data.amsterdam.nl/lufo2017_rd/15/15137/17281.png">Tiles</a></td>
                 <td>Rijksdriehoekstelsel (5-16)</td>
