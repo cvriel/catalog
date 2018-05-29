@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang=nl>
 <head>
+    <meta charset="utf-8">
     <link rel="stylesheet" href="https://fast.fonts.net/cssapi/3680cf49-2b05-4b8a-af28-fa9e27d2bed0.css">
+    <link href="https://data.amsterdam.nl/favicon.png" rel="shortcut icon">
     <title>API's en Geo-webservices</title>
     <style>
         html, body {
@@ -35,7 +37,10 @@
             font-size: 18px;
             max-width: 734px;
         }
-
+        p {
+            margin-left: 20px;
+            margin-right: 20px;
+        }
         .header {
             display: block;
             height: 50px;
@@ -64,14 +69,17 @@
         }
         thead {
             height: 26px;
-            background-color: #999999;
-            color: #fff;
+            background-color: #fff;
+            color: #000;
             text-align:left;
         }
         th {
             padding-left: 20px;
             font-family: "Avenir LT W01 85 Heavy", Arial, sans-serif;
             font-weight: normal;
+            border-bottom: 1px solid #000;
+            border-top: 1px solid #000;
+            height: 32px;
         }
         tbody tr, tbody td {
             border-bottom: #ccc 1px solid;
@@ -99,6 +107,26 @@
             width: 11%;
         }
     </style>
+    <!-- Matomo -->
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//piwik.datapunt.amsterdam.nl/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '12']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <!-- End Matomo Code -->
+    <noscript>
+        <!-- Matomo Image Tracker-->
+        <img src="https://piwik.datapunt.amsterdam.nl/piwik.php?idsite=12&rec=1" style="border:0" alt="" />
+        <!-- End Matomo -->
+    </noscript> 
 </head>
 <body>
     <div class="header">
@@ -112,7 +140,7 @@
     <p>Dit overzicht van browsable interfaces en openAPI documentatie beperkt zich tot de API's
 	ontwikkeld door programma DataPunt van Onderzoek, Informatie en Statistiek.
 	API's van andere partijen vind je in de
-	<a href="https://data.amsterdam.nl/#?dsd=catalogus&dsp=1&dsv=CARDS&mpb=topografie&mpz=11&mpv=52.3731081:4.8932945">datasetcatalogus</a>.
+	<a href="https://data.amsterdam.nl/#?dsd=dcatd&dsp=1&dsv=CATALOG">datasetcatalogus</a>.
 	<br/><br/>Instructies, bijv. over omgaan met autorisatie, vind je op de helppagina over
         <a href="https://data.amsterdam.nl/#?mpb=topografie&pgn=content-overzicht&pgt=apis">API's gebruiken</a>.<br>datapunt at amsterdam punt nl</p>
 
@@ -304,7 +332,7 @@
             <tr>
                 <td>Typeahead</td>
                 <td></td>
-                <td><a href="/api/swagger/?url=/typeahead/spec.json">OpenAPI</a></td>
+                <td><a href="/api/swagger/?url=/typeahead/openapi">OpenAPI</a></td>
                 <td>Live</td>
                 <td><a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/"><img
                     src="https://i.creativecommons.org/p/zero/1.0/88x31.png" width="88" height="31" alt="CC0"/></a></td>
