@@ -1,6 +1,6 @@
-import queryStringParser from '../query-string-parser/query-string-parser';
-import stateTokenGenerator from '../state-token-generator/state-token-generator';
-import accessTokenParser from '../access-token-parser/access-token-parser';
+import queryStringParser from 'query-string-parser/query-string-parser';
+import stateTokenGenerator from 'state-token-generator/state-token-generator';
+import accessTokenParser from 'access-token-parser/access-token-parser';
 
 // A map of the error keys, that the OAuth2 authorization service can
 // return, to a full description
@@ -59,12 +59,15 @@ const scopes = [
   'GREX/R', // Leesrechten
 
   // Catalogus (Dcatd) admin
-  'CAT/W' // Schrijfrechten
+  'CAT/W', // Schrijfrechten
+
+  // Signals
+  'SIG/ALL'
 ];
 const encodedScopes = encodeURIComponent(scopes.join(' '));
 // The URI we need to redirect to for communication with the OAuth2
 // authorization service
-export const AUTH_PATH = `oauth2/authorize?idp_id=datapunt&response_type=token&client_id=citydata&scope=${encodedScopes}`;
+export const AUTH_PATH = `oauth2/authorize?idp_id=datapunt&response_type=token&client_id=tableau&scope=${encodedScopes}`;
 
 // The keys of values we need to store in the session storage
 //
