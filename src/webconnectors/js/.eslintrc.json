@@ -2,14 +2,12 @@
     "env": {
         "browser": true,
         "commonjs": true,
-        "es6": true,
         "node": true,
-        "jquery": true,
-        "console": true,
-	"esnext":true
+        "jquery": true
     },
     "extends": "eslint:recommended",
     "parserOptions": {
+	"esversion": 9,
         "sourceType": "module"
     },
     "rules": {
