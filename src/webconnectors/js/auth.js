@@ -31,7 +31,7 @@ const AUTH_PARAMS = ["access_token", "token_type", "expires_in", "state"];
 //  ? "https://api.data.amsterdam.nl/"
 //  : "https://acc.api.data.amsterdam.nl/";
 
-export const API_ROOT = "https://acc.api.data.amsterdam.nl/";
+export const API_ROOT = window.location.href;
 
 // All the scopes this City Daty frontend needs for communication with
 // the backend APIs
