@@ -144,11 +144,11 @@ import { getAuthHeaders } from "./auth.js";
 
   // Download the data
   myConnector.getData = function(table, doneCallback) {
-  // var dateObj = JSON.parse(tableau.connectionData),
-  // dateString = "starttime=" + dateObj.startDate + "&endtime=" + dateObj.endDate,
+    // var dateObj = JSON.parse(tableau.connectionData),
+    // dateString = "starttime=" + dateObj.startDate + "&endtime=" + dateObj.endDate,
 
-    // var apiCall = "https://api.data.amsterdam.nl/signals/signal/";  // + dateString + "";
-    var apiCall = "http://localhost:8760/localhost:8000/signals/auth/signal/";  // + dateString + "";
+    var apiCall = window.location.href + "signals/signal/";  // + dateString + "";
+    // var apiCall = "http://localhost:8760/localhost:8000/signals/auth/signal/";  // + dateString + "";
 
     var params = {
       "format": "json",
@@ -157,7 +157,6 @@ import { getAuthHeaders } from "./auth.js";
       "page": 1,
     };
 
-    //var hasresults = [];
     var feat = [];
     var promises = [];
     var totalcount = 0;
@@ -166,8 +165,7 @@ import { getAuthHeaders } from "./auth.js";
 
       params.page = page;
 
-      //set auth headers
-
+      // set auth headers
       $.ajaxSetup({
         headers : { "Authorization": tableau.password }
       });
@@ -279,9 +277,6 @@ import { getAuthHeaders } from "./auth.js";
 
     $("#loginButton").click(function() {
       window.auth.login();
-      // console.log("lets login!");
-      //hasauth = window.auth.isAuthenticated();
-      // updateUIWithAuthState(hasauth);
     });
   });
 
