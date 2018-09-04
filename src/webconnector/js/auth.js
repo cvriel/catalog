@@ -26,12 +26,19 @@ const AUTH_PARAMS = ["access_token", "token_type", "expires_in", "state"];
 // e.g.: "export conts API_ROOT = "production" === "production" ? ... : ...;
 // see: https://webpack.js.org/plugins/environment-plugin/
 
+let api_root = "";
 
-//export const API_ROOT = process.env.NODE_ENV === "production"
-//  ? "https://api.data.amsterdam.nl/"
-//  : "https://acc.api.data.amsterdam.nl/";
+if (window.location.host.includes("acc") ||
+    window.location.host.includes("127.0.0.1") ||
+    window.location.host.includes("localhost")
+) {
+  api_root   = "https://acc.api.data.amsterdam.nl/";
+} else {
+  api_root = "https://api.data.amsterdam.nl/";
+}
 
-export const API_ROOT = window.location.href;
+export const API_ROOT = api_root;
+
 
 // All the scopes this City Daty frontend needs for communication with
 // the backend APIs
