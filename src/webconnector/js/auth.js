@@ -274,6 +274,7 @@ export function getAuthHeaders() {
 
 window.auth = {
   // getAuthHeaders,
+  API_ROOT,
   getAccessToken,
   login,
   logout,

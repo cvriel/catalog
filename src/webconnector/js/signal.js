@@ -147,7 +147,7 @@ import { getAuthHeaders } from "./auth.js";
     // var dateObj = JSON.parse(tableau.connectionData),
     // dateString = "starttime=" + dateObj.startDate + "&endtime=" + dateObj.endDate,
 
-    var apiCall = window.location.href + "signals/signal/";  // + dateString + "";
+    var apiCall = window.auth.API_ROOT + "signals/auth/signal/";  // + dateString + "";
     // var apiCall = "http://localhost:8760/localhost:8000/signals/auth/signal/";  // + dateString + "";
 
     var params = {
