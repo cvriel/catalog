@@ -6,3 +6,5 @@ services:
       - "8089:80"
     environment:
       BASE_URL: "https://acc.api.data.amsterdam.nl/"
+    #volumes:
+      #- "./src:/usr/share/nginx/html/"
