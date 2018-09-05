@@ -204,6 +204,14 @@ import { getAuthHeaders } from "./auth.js";
                 "extra_properties": feat[i].extra_properties
               };
 
+              if(row.incident_date_start !== null) {
+                row.incident_date_start = row.incident_date_start.toString().slice(0, 10);
+              }
+
+              if(row.incident_date_end !== null) {
+                row.incident_date_end = row.incident_date_end.toString().slice(0, 10);
+              }
+
               //if(feat[i].well !== null) {
               //  row.lon = feat[i].well.geometrie.coordinates[0];
               //  row.lat = feat[i].well.geometrie.coordinates[1];
