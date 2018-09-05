@@ -49,15 +49,15 @@ import { getAuthHeaders } from "./auth.js";
       alias: "stadsdeel",
       dataType: tableau.dataTypeEnum.string
     }, {
-      id: "category main",
+      id: "category_main",
       alias: "category main",
       dataType: tableau.dataTypeEnum.string
     }, {
-      id: "category sub",
+      id: "category_sub",
       alias: "category sub",
       dataType: tableau.dataTypeEnum.string
     }, {
-      id: "created at",
+      id: "created_at",
       dataType: tableau.dataTypeEnum.date
     }, {
       id: "incident_date_start",
@@ -194,8 +194,8 @@ import { getAuthHeaders } from "./auth.js";
                 "lon": feat[i].location.geometrie.coordinates[0],
                 "lat": feat[i].location.geometrie.coordinates[1],
                 "status": feat[i].status.state,
-                "category main": feat[i].category.main,
-                "category sub": feat[i].category.sub,
+                "category_main": feat[i].category.main,
+                "category_sub": feat[i].category.sub,
                 "text": feat[i].text,
                 "text_extra": feat[i].text_extra,
                 "created_at": feat[i].created_at,
@@ -211,6 +211,11 @@ import { getAuthHeaders } from "./auth.js";
               if(row.incident_date_end !== null) {
                 row.incident_date_end = row.incident_date_end.toString().slice(0, 10);
               }
+
+              if(row.created_at !== null) {
+                row.created_at = row.created_at.toString().slice(0, 10);
+              }
+
 
               //if(feat[i].well !== null) {
               //  row.lon = feat[i].well.geometrie.coordinates[0];
