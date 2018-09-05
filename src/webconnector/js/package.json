@@ -1,0 +1,15 @@
+{
+  "name": "wdc",
+  "version": "1.0.0",
+  "description": "web data connectors",
+  "main": "signals.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "stephan preeker",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-es2015": "^7.0.0-beta.53"
+  }
+}
