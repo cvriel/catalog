@@ -98,10 +98,10 @@
       "page": 1,
     };
 
-    var page = 1;
     //var hasresults = [];
     var feat = [];
     var promises = [];
+    var totalcount = 0;
 
     function getPage(page) {
 
@@ -109,6 +109,7 @@
 
       promises.push($.getJSON(apiCall, params, function(resp) {
 
+        totalcount = resp.count;
         feat = resp.results;
 
         var tableData = [];
@@ -148,13 +149,24 @@
       }));
     }
 
-    do {
-      getPage(page);
-      page += 1;
-      // get the next page.
-      // as long as we get response continue loading!
-      // I do not know how to do this with promises
-    } while(page < 1);
+    function loadAPI(totalpages){
+      var page = 2;
+      while (page <= totalpages){
+        // get the next page.
+        getPage(page);
+        page += 1;
+      }
+    }
+
+    function slurpAPI(){
+      // load the fist page
+      getPage(1);
+      $.when.apply($, promises).then(function(){
+        loadAPI(Math.ceil(totalcount / params.page_size));
+      });
+    }
+
+    slurpAPI();
 
     $.when.apply($, promises).then(function(){
       doneCallback();
