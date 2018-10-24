@@ -7,7 +7,7 @@ A quick overview
 
 shared:
 
-        auth.js - Does the oauth2 dance to get a access token
+        auth.js - Does the oauth2 dance to get an access token
 
 webconnectors:
 
