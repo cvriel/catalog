@@ -1,5 +1,5 @@
 # Build
-FROM node:9.4 AS build-deps
+FROM node:10.14.2 AS build-deps
 MAINTAINER datapunt.ois@amsterdam.nl
 
 COPY src/webconnector/js /build
@@ -12,7 +12,7 @@ RUN npm install -D babel-loader @babel/polyfill @babel/core @babel/preset-env
 RUN webpack
 
 # webserver image.
-FROM nginx
+FROM nginx:1.15.7
 MAINTAINER datapunt.ois@amsterdam.nl
 
 ENV BASE_URL=https://api.data.amsterdam.nl/
