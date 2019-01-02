@@ -27,7 +27,8 @@
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
     "bluebird": "3.5.3",
-    "lodash.range": "3.2.0"
+    "lodash.range": "3.2.0",
+    "url-search-params-polyfill": "5.0.0"
   },
   "browserslist": "> 0.25%, not dead"
 }

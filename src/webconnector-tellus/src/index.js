@@ -1,4 +1,6 @@
 import "@babel/polyfill";
+import 'url-search-params-polyfill';
+
 import { getAuthHeaders } from "./auth.js";
 import scraper from './scraper.js';
 import {
@@ -15,8 +17,8 @@ const SCOPES = [
   "TLLS/R"
 ];
 
-// const API_ROOT = "https://api.data.amsterdam.nl/tellus/";
-const API_ROOT = "http://localhost:8000/tellus/";
+const API_ROOT = "https://api.data.amsterdam.nl/tellus/";
+// const API_ROOT = "http://localhost:8000/tellus/";
 
 const scraperMapping = {
   [telRichtingTable.id]: {

@@ -1,9 +1,13 @@
-const MAX_PAGES = 3; // Don't render to much. Tableau simulator can't handle more than a tiny bit of data.
+
+// Allows limiting max results
+// Useful for limiting results when using Tableau web connector simulator, because it can't handle a more than a
+// tiny bit of data
+const MAX_PAGES = 1000000;
 
 export default function(table, scraperMapping, token, doneCallback) {
   const defaultParams = {
     "format": "json",
-    "page_size": 2,
+    "page_size": 5000,
   };
 
   // set auth headers
