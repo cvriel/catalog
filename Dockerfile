@@ -11,6 +11,12 @@ RUN npm install -D babel-loader @babel/polyfill @babel/core @babel/preset-env
 
 RUN webpack
 
+COPY src/webconnector-tellus /build-tellus
+WORKDIR /build-tellus
+RUN npm install && \
+  npm cache clean --force
+RUN webpack
+
 # webserver image.
 FROM nginx:1.15.7
 MAINTAINER datapunt.ois@amsterdam.nl
@@ -21,4 +27,5 @@ RUN chmod 755 /usr/local/bin/cmd.sh
 
 COPY src/ /usr/share/nginx/html/
 COPY --from=build-deps /build/dist/ /usr/share/nginx/html/webconnector/js/dist/
+COPY --from=build-deps /build-tellus/dist/ /usr/share/nginx/html/webconnector/tellus/
 CMD cmd.sh
