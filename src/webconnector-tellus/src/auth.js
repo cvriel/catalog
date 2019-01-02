@@ -39,50 +39,10 @@ if (window.location.host.includes("acc") ||
 
 export const API_ROOT = api_root;
 
-
-// All the scopes this City Daty frontend needs for communication with
-// the backend APIs
-const scopes = [
-  // TODO: make scopes configurable
-  // // Kadaster
-  // // Alle attributen van een kadastraal niet-natuurlijk subject,
-  // // inclusief alle rechten op kadastrale objecten
-  // "BRK/RS",
-  // // Alle atrributen van een kadastraal subject (natuurlijk en
-  // // niet-natuurlijk), inclusief alle rechten op kadastrale objecten
-  // "BRK/RSN",
-  // // Alle attributen van een kadastraal object, inclusief koopsom,
-  // // koopsom_valuta_code, koopjaar, cultuurcode_onbebouwd,
-  // // cultuurcode_bebouwd en zakelijke rechten van de bijbehorende
-  // // kadastrale subjecten
-  // "BRK/RO",
-  //
-  // // Wet Kenbaarheid Beperkingen
-  // "WKPB/RBDU", // Lezen URL Brondocument
-  //
-  // // Monumenten
-  // "MON/RBC", // Lezen beschrijvingen van Complexen
-  // "MON/RDM", // Lezen details van Monumenten
-  //
-  // // Handelsregister
-  // "HR/R", // Leesrechten
-  //
-  // // Grondexploitatie
-  // "GREX/R", // Leesrechten
-  //
-  // // Catalogus (Dcatd) admin
-  // "CAT/W", // Schrijfrechten
-  //
-  // // Signals
-  // "SIG/ALL",
-
-  "TLLS/R"
-];
-const encodedScopes = encodeURIComponent(scopes.join(" "));
 // The URI we need to redirect to for communication with the OAuth2
 // authorization service
 // TODO: use own client_id
-export const AUTH_PATH = `oauth2/authorize?idp_id=datapunt&response_type=token&client_id=citydata&scope=${encodedScopes}`;
+export const AUTH_PATH = `oauth2/authorize?idp_id=datapunt&response_type=token&client_id=citydata`;
 
 // The keys of values we need to store in the session storage
 //
@@ -205,7 +165,7 @@ function restoreAccessToken() {
 /**
  * Redirects to the OAuth2 authorization service.
  */
-export function login() {
+export function login(scopes) {
   // Get the URI the OAuth2 authorization service needs to use as callback
   const callback = encodeURIComponent(`${location.protocol}//${location.host}${location.pathname}`);
   // Get a random string to prevent CSRF
@@ -220,7 +180,8 @@ export function login() {
   sessionStorage.setItem(RETURN_PATH, location.hash);
   sessionStorage.setItem(STATE_TOKEN, stateToken);
 
-  location.assign(`${API_ROOT}${AUTH_PATH}&state=${encodedStateToken}&redirect_uri=${callback}`);
+  const encodedScopes = encodeURIComponent(scopes.join(" "));
+  location.assign(`${API_ROOT}${AUTH_PATH}&scope=${encodedScopes}&state=${encodedStateToken}&redirect_uri=${callback}`);
 }
 
 export function logout() {
@@ -275,16 +236,3 @@ export function getAuthHeaders() {
   const accessToken = getAccessToken();
   return accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
 }
-
-window.auth = {
-  // getAuthHeaders,
-  API_ROOT,
-  getAccessToken,
-  login,
-  logout,
-  initAuth,
-  getReturnPath,
-  isAuthenticated,
-  getScopes,
-  getName
-};
