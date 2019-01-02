@@ -1,3 +1,4 @@
+import "@babel/polyfill";
 import { getAuthHeaders } from "./auth.js";
 import scraper from './scraper.js';
 import {

@@ -31,10 +31,18 @@ module.exports = {
           loader:  "babel-loader",
           options: {
             presets: [
-              ["@babel/preset-env", { useBuiltIns: 'entry' }]
+              ["@babel/preset-env", {
+                useBuiltIns: 'entry',
+                "targets": {
+                  // Don't know exact Tableau wdc version, but it's old, so IE6 will stand as an old browser stand in.
+                  IE: 6
+                },
+                "debug": true
+              }]
             ],
             plugins: [
-              ["@babel/plugin-transform-spread"]
+              ["@babel/plugin-transform-spread"],
+              ["@babel/plugin-transform-regenerator"]
             ]
           }
         }

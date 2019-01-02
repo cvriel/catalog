@@ -3,7 +3,7 @@ const MAX_PAGES = 3; // Don't render to much. Tableau simulator can't handle mor
 export default function(table, scraperMapping, token, doneCallback) {
   const defaultParams = {
     "format": "json",
-    "page_size": 1000,
+    "page_size": 2,
   };
 
   // set auth headers
@@ -20,6 +20,7 @@ export default function(table, scraperMapping, token, doneCallback) {
   const { apiToSchemaMapper } = scraperMapping[id];
 
   function getEndpoint(endpoint) {
+    console.log('>>> getting endpoint: ', endpoint);
     // Hack to prevent $.getJSON from adding duplicate get parameters,
     // parameters already present in the endpoint are merged with default parameters
     // using JS object spreading removing duplicates.
@@ -30,41 +31,51 @@ export default function(table, scraperMapping, token, doneCallback) {
     entries.forEach( ([key, value]) => params[key]= value);
 
     console.time(endpoint);
-    return $.getJSON(bareEndpoint, params, (json) => {
-      const results = json.results;
-      const tableData = [];
 
-      if (results === undefined || results.length === 0) {
-        console.error('unexpected results: ', results);
-      } else {
-        results.forEach(result => {
-          const row = apiToSchemaMapper(result);
-          tableData.push(row);
-        });
-        table.appendRows(tableData);
-        // console.log('data loaded for endpoint: ', endpoint);
-      }
+    // Converting Json promise to ES6 Promise
+    return new Promise((resolve, reject) => {
 
-      return json;
+      // Make json call
+      $.getJSON(bareEndpoint, params, (json) => {
+        const results = json.results;
+        const tableData = [];
+
+        if (results === undefined || results.length === 0) {
+          console.error('unexpected results: ', results);
+        } else {
+          results.forEach(result => {
+            const row = apiToSchemaMapper(result);
+            tableData.push(row);
+          });
+          table.appendRows(tableData);
+          // console.log('data loaded for endpoint: ', endpoint);
+        }
+
+        return json;
+      })
+        .then(resolve)
+        .fail(reject);
     });
   }
 
-  async function slurpCursorAPI() {
+  function slurpCursorAPI() {
     let page = 1;
-    let next;
-    try {
-      const { endPoint } = scraperMapping[id];
-      next = endPoint;
-      do {
-        console.log('>>> getting page: ', page, next);
-        const json = await getEndpoint(next);
-        next = json._links.next && json._links.next.href;
-        page += 1;
-      } while(next && page < MAX_PAGES);
-    } catch (error) {
-      console.error(`Couldn\'t load page ${id}, page: ${page}, ${next}: `, error);
-      throw error;
+
+    function getEndpointPromiseLoop(json) {
+      const next = json._links.next && json._links.next.href;
+      page += 1;
+      return next && page <= MAX_PAGES
+        ? getEndpoint(next)
+          .then(getEndpointPromiseLoop)
+          .catch((error) => {
+            console.error(`Couldn\'t load page ${id}, page: ${page}, ${next}: `, error);
+            throw error;
+          })
+        : Promise.resolve()
     }
+
+    const { endPoint } = scraperMapping[id];
+    return getEndpoint(endPoint).then(getEndpointPromiseLoop);
   }
 
   const t0 = performance.now();
