@@ -42,7 +42,7 @@ export const API_ROOT = api_root;
 // The URI we need to redirect to for communication with the OAuth2
 // authorization service
 // TODO: use own client_id
-export const AUTH_PATH = `oauth2/authorize?idp_id=datapunt&response_type=token&client_id=citydata`;
+export const AUTH_PATH = `oauth2/authorize?idp_id=datapunt&response_type=token&client_id=tableau_webconnectors`;
 
 // The keys of values we need to store in the session storage
 //
