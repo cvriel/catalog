@@ -110,11 +110,6 @@ tellusConnector.getSchema = function(schemaCallback) {
 tellusConnector.init = function(initCallback) {
   tableau.authType = tableau.authTypeEnum.custom;
 
-  // If we are in the auth phase we only want to show the UI needed for auth
-  if (tableau.phase == tableau.phaseEnum.authPhase) {
-    // $("#getvenuesbutton").css("display", "none");
-  }
-
   if (tableau.phase == tableau.phaseEnum.gatherDataPhase) {
     // If API that WDC is using has an endpoint that checks
     // the validity of an access token, that could be used here.
@@ -158,8 +153,8 @@ $(document).ready(function() {
 
   initAuth();
 
-  const hasauth = isAuthenticated();
-  updateUIWithAuthState(hasauth);
+  const hasAuth = isAuthenticated();
+  updateUIWithAuthState(hasAuth);
 
   $("#loginButton").click(function() {
     login(SCOPES);
