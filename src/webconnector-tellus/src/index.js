@@ -17,7 +17,8 @@ const SCOPES = [
   "TLLS/R"
 ];
 
-const API_ROOT = "https://api.data.amsterdam.nl/tellus/";
+// const API_ROOT = "https://api.data.amsterdam.nl/tellus/";
+const API_ROOT = "https://acc.api.data.amsterdam.nl/tellus/";
 // const API_ROOT = "http://localhost:8000/tellus/";
 
 const scraperMapping = {
