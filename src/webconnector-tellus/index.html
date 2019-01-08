@@ -36,7 +36,19 @@
 
           <div class="show-authenticated">
               <h3>bron: <a href="https://api.data.amsterdam.nl/tellus">api.data.amsterdam.nl/tellus</a></h3>
-              <form></form>
+              <form>
+                <div>
+                  <h5>Query limit (rounded up to page size):</h5>
+                  <input type="radio" id="limitAll" name="limit" value="0" checked>
+                  <label for="limitAll">All</label>
+                  <input type="radio" id="limit1000" name="limit" value="1000">
+                  <label for="limit1000">1.000</label>
+                  <input type="radio" id="limit10000" name="limit" value="10000">
+                  <label for="limit10000">10.000</label>
+                  <input type="radio" id="limit100000" name="limit" value="100000">
+                  <label for="limit100000">100.000</label>
+                </div>
+              </form>
               <button type="button" id="submitButton" autofocus class="btn btn-success" style = "margin: 10px;">Get Tellus Data</button>
               <div id="errorMsg">datapunt@amsterdam.nl</div>
            </div>

@@ -3,7 +3,7 @@ import bluebird from 'bluebird';
 
 const PARALLEL_CALLS = 5;
 
-export default function(table, scraperMapping, token, doneCallback) {
+export default function(table, scraperMapping, token, doneCallback, limit) {
   const params = {
     "format": "json",
     "detailed": 1,
@@ -55,7 +55,9 @@ export default function(table, scraperMapping, token, doneCallback) {
       const itemCount = json.count;
       const totalPages = Math.ceil(itemCount / params.page_size);
 
-      const maxPages = 30;
+      const maxPages = limit > 0 ? Math.ceil(limit / params.page_size) : 30;
+
+      console.log(`Retrieving ${Math.min(totalPages, maxPages)} pages of page size ${params.page_size}`);
 
       if (totalPages <= 1) {
         // done
@@ -63,7 +65,6 @@ export default function(table, scraperMapping, token, doneCallback) {
       } else {
         // get more pages
         const pages = range(2, Math.min(totalPages, maxPages) + 1);
-        console.log(pages);
 
         // Perform multiple promises at the same time using elements of `pages` as argument to `getPage`.
         // Note order of pages is likely out of order!

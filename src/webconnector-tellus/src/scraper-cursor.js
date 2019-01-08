@@ -4,7 +4,7 @@
 // tiny bit of data
 const MAX_PAGES = 1000000;
 
-export default function(table, scraperMapping, token, doneCallback) {
+export default function(table, scraperMapping, token, doneCallback, limit=0) {
   const defaultParams = {
     "format": "json",
     "page_size": 5000,
@@ -64,11 +64,14 @@ export default function(table, scraperMapping, token, doneCallback) {
 
   function slurpCursorAPI() {
     let page = 1;
-
+    let pageSize = limit > 0 && limit < defaultParams.page_size ? limit : defaultParams.page_size;
+    let maxPages = limit > 0 ? Math.ceil(limit / pageSize) : MAX_PAGES;
+    console.log(`Retrieving up to ${maxPages} pages of page size ${pageSize}`);
+    
     function getEndpointPromiseLoop(json) {
       const next = json._links.next && json._links.next.href;
       page += 1;
-      return next && page <= MAX_PAGES
+      return next && page <= maxPages
         ? getEndpoint(next)
           .then(getEndpointPromiseLoop)
           .catch((error) => {
