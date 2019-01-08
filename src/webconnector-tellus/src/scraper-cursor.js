@@ -88,8 +88,8 @@ export default function(table, scraperMapping, token, doneCallback) {
     const diff = performance.now() - t0; // milliseconds
     console.log(`Done loading API ${diff/1000}s`);
     doneCallback();
-  }).catch(() => {
-    console.error('Cancelling...');
+  }).catch((e) => {
+    console.error('Cancelling...', e);
     doneCallback();
   })
 };
