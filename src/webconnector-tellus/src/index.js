@@ -40,6 +40,7 @@ const scraperMapping = {
   [telRichtingTable.id]: {
     endPoint: API_ROOT + 'tel_richting/',
     paginationType: PAGINATION_TYPE.PAGE,
+    requiresAuthentication: true,
     apiToSchemaMapper: (result) => ({
       "tellus_id": result.tellus,
       "richting": result.richting,
