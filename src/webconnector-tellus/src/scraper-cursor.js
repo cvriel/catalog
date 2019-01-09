@@ -64,14 +64,13 @@ export default function(table, scraperMapping, token, doneCallback, limit) {
 
   function slurpCursorAPI() {
     let page = 1;
-    const pageSize = limit > 0 && limit < defaultParams.page_size ? limit : defaultParams.page_size;
-    const maxPages = limit > 0 ? Math.ceil(limit / pageSize) : MAX_PAGES;
-    console.log(`Retrieving up to ${maxPages} pages of page size ${pageSize}`);
+    const maxPages = limit > 0 ? Math.ceil(limit / defaultParams.page_size) : MAX_PAGES;
+    console.log(`Retrieving up to ${maxPages} pages of page size ${defaultParams.page_size}`);
     
     function getEndpointPromiseLoop(json) {
       const next = json._links.next && json._links.next.href;
-      tableau.reportProgress(`Retrieving page ${page}, total rows ${page * pageSize}`);
       page += 1;
+      next && page <= maxPages && tableau.reportProgress(`Retrieved page ${page}, total rows ${page * defaultParams.page_size}`);
       return next && page <= maxPages
         ? getEndpoint(next)
           .then(getEndpointPromiseLoop)
