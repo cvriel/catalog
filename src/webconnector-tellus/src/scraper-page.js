@@ -27,6 +27,7 @@ export default function(table, scraperMapping, token, doneCallback, limit) {
 
   function getPage(page) {
     console.log('getting page: ', page);
+    tableau.reportProgress(`Retrieving page ${page}`);
     params.page = page;
 
     return $.getJSON(endPoint, params, (json) => {
