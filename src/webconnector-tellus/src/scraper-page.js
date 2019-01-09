@@ -11,19 +11,18 @@ export default function(table, scraperMapping, token, doneCallback, limit) {
     // "page_size": 5, //1000 resulted in too many canceled response
   };
 
-
-  // set auth headers
-  if (token) {
-    $.ajaxSetup({
-      headers : { "Authorization": token }
-    });
-  }
-
   // NOTE: only use documented fields from table.tableInfo!
   // Other fields will not be presented in the actual Tableau environment!!!
   // See https://tableau.github.io/webdataconnector/docs/api_ref.html#webdataconnectorapi.tableinfo-1
   const { id } = table.tableInfo;
-  const { endPoint, apiToSchemaMapper } = scraperMapping[id];
+  const { endPoint, requiresAuthentication, apiToSchemaMapper } = scraperMapping[id];
+
+  // set auth headers
+  if (requiresAuthentication && token) {
+    $.ajaxSetup({
+      headers : { "Authorization": token }
+    });
+  }
 
   function getPage(page) {
     console.log('getting page: ', page);

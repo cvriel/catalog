@@ -10,18 +10,18 @@ export default function(table, scraperMapping, token, doneCallback, limit) {
     "page_size": 5000,
   };
 
-  // set auth headers
-  if (token) {
-    $.ajaxSetup({
-      headers : { "Authorization": token }
-    });
-  }
-
   // NOTE: only use documented fields from table.tableInfo!
   // Other fields will not be presented in the actual Tableau environment!!!
   // See https://tableau.github.io/webdataconnector/docs/api_ref.html#webdataconnectorapi.tableinfo-1
   const { id } = table.tableInfo;
-  const { apiToSchemaMapper } = scraperMapping[id];
+  const { requiresAuthentication, apiToSchemaMapper } = scraperMapping[id];
+
+  // set auth headers
+  if (requiresAuthentication && token) {
+    $.ajaxSetup({
+      headers : { "Authorization": token }
+    });
+  }
 
   function getEndpoint(endpoint) {
     console.log('>>> getting endpoint: ', endpoint);
@@ -45,7 +45,7 @@ export default function(table, scraperMapping, token, doneCallback, limit) {
         const tableData = [];
 
         if (results === undefined || results.length === 0) {
-          console.error('unexpected results: ', results);
+          throw new Error(`Unexpected empty results: ${results}`);
         } else {
           results.forEach(result => {
             const row = apiToSchemaMapper(result);

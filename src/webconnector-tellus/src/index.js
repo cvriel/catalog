@@ -1,7 +1,6 @@
 import "@babel/polyfill";
 import 'url-search-params-polyfill';
 
-import { getAuthHeaders } from "./auth.js";
 import scraper from './scraper.js';
 import {
   tellingTotaalUurdagLengteTable,
@@ -11,7 +10,12 @@ import {
   telRichtingTable
 } from "./wdpSchema";
 import { PAGINATION_TYPE } from './paginationType';
-import {initAuth, isAuthenticated, login} from "./auth";
+import {
+  getAuthHeaders,
+  initAuth,
+  isAuthenticated,
+  login
+} from "./auth";
 
 const SCOPES = [
   "TLLS/R"
@@ -21,10 +25,22 @@ const SCOPES = [
 const API_ROOT = "https://acc.api.data.amsterdam.nl/tellus/";
 // const API_ROOT = "http://localhost:8000/tellus/";
 
+let auth_root;
+if (window.location.host.includes("acc") ||
+  window.location.host.includes("127.0.0.1") ||
+  window.location.host.includes("localhost")
+) {
+  auth_root   = "https://acc.api.data.amsterdam.nl/";
+} else {
+  auth_root = "https://api.data.amsterdam.nl/";
+}
+
+
 const scraperMapping = {
   [telRichtingTable.id]: {
     endPoint: API_ROOT + 'tel_richting/',
     paginationType: PAGINATION_TYPE.PAGE,
+    requiresAuthentication: true,
     apiToSchemaMapper: (result) => ({
       "tellus_id": result.tellus,
       "richting": result.richting,
@@ -49,6 +65,7 @@ const scraperMapping = {
   [tellingTotaalUurdagTable.id]: {
     endPoint: API_ROOT + 'telling_totaal_uur_dag/',
     paginationType: PAGINATION_TYPE.CURSOR,
+    requiresAuthentication: true,
     apiToSchemaMapper: (result) => ({
       "id": result.id,
       "tellus_id": result.tellus,
@@ -61,6 +78,7 @@ const scraperMapping = {
   [tellingTotaalUurdagLengteTable.id]: {
     endPoint: API_ROOT + 'telling_totaal_uur_lengte_dag/',
     paginationType: PAGINATION_TYPE.CURSOR,
+    requiresAuthentication: true,
     apiToSchemaMapper: (result) => ({
       "id": result.id,
       "tellus_id": result.tellus,
@@ -76,6 +94,7 @@ const scraperMapping = {
   [tellingTotaalUurdagSnelheidTable.id]: {
     endPoint: API_ROOT + 'telling_totaal_uur_snelheid_dag/',
     paginationType: PAGINATION_TYPE.CURSOR,
+    requiresAuthentication: true,
     apiToSchemaMapper: (result) => ({
       "id": result.id,
       "tellus_id": result.tellus,
@@ -118,15 +137,13 @@ tellusConnector.init = function(initCallback) {
   }
 
   const accessToken = getAuthHeaders().Authorization;
-  const hasAuth = (accessToken && accessToken.length > 0) || tableau.password.length > 0;
-  updateUIWithAuthState(hasAuth);
-
-  initCallback();
+  const hasAuthenticated = (accessToken && accessToken.length > 0) || tableau.password.length > 0;
+  updateUIWithAuthState(hasAuthenticated);
 
   // If we are not in the data gathering phase, we want to store the token
   // This allows us to access the token in the data gathering phase
   if (tableau.phase == tableau.phaseEnum.interactivePhase || tableau.phase == tableau.phaseEnum.authPhase) {
-    if (hasAuth) {
+    if (hasAuthenticated) {
       tableau.password = accessToken;
 
       if (tableau.phase == tableau.phaseEnum.authPhase) {
@@ -137,6 +154,8 @@ tellusConnector.init = function(initCallback) {
       return;
     }
   }
+
+  initCallback();
 };
 
 // Download the data
@@ -147,7 +166,7 @@ tellusConnector.getData = function(table, doneCallback) {
 
 // Create event listeners for when the user submits the form
 $(document).ready(function() {
-  $("#submitButton").click(function() {
+  document.querySelector('#submitButton').addEventListener('click', () => {
     tableau.connectionName = "Tellus"; // This will be the data source name in Tableau
     const limitValue = $("input[type='radio'][name='limit']:checked").val();
     tableau.connectionData = limitValue;
@@ -156,11 +175,10 @@ $(document).ready(function() {
 
   initAuth();
 
-  const hasAuth = isAuthenticated();
-  updateUIWithAuthState(hasAuth);
+  updateUIWithAuthState(isAuthenticated());
 
-  $("#loginButton").click(function() {
-    login(SCOPES);
+  document.querySelector('#loginButton').addEventListener('click', () => {
+    login(auth_root, SCOPES);
   });
 });
 

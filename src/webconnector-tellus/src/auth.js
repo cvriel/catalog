@@ -1,6 +1,5 @@
 import queryStringParser from "./query-string-parser/query-string-parser.js";
 import stateTokenGenerator from "./state-token-generator/state-token-generator.js";
-import accessTokenParser from "./access-token-parser/access-token-parser.js";
 
 // A map of the error keys, that the OAuth2 authorization service can
 // return, to a full description
@@ -22,42 +21,19 @@ const ERROR_MESSAGES = {
 // success
 const AUTH_PARAMS = ["access_token", "token_type", "expires_in", "state"];
 
-// Resolved at compile time by webpack,
-// e.g.: "export conts API_ROOT = "production" === "production" ? ... : ...;
-// see: https://webpack.js.org/plugins/environment-plugin/
-
-let api_root = "";
-
-if (window.location.host.includes("acc") ||
-    window.location.host.includes("127.0.0.1") ||
-    window.location.host.includes("localhost")
-) {
-  api_root   = "https://acc.api.data.amsterdam.nl/";
-} else {
-  api_root = "https://api.data.amsterdam.nl/";
-}
-
-export const API_ROOT = api_root;
-
 // The URI we need to redirect to for communication with the OAuth2
 // authorization service
-// TODO: use own client_id
 export const AUTH_PATH = `oauth2/authorize?idp_id=datapunt&response_type=token&client_id=tableau_webconnectors`;
 
+//
 // The keys of values we need to store in the session storage
 //
-// `location.pathname` string at the moment we redirect to the
-// OAuth2 authorization service, and need to get back to afterwards
-const RETURN_PATH = "returnPath";
 // The OAuth2 state(token) (OAuth terminology, has nothing to do with
 // our app state), which is a random string
-const STATE_TOKEN = "stateToken";
+const STATE_TOKEN_KEY = "stateToken";
 // The access token returned by the OAuth2 authorization service
 // containing user scopes and name
-const ACCESS_TOKEN = "accessToken";
-
-let returnPath;
-let tokenData = {};
+const ACCESS_TOKEN_KEY = "accessToken";
 
 /**
  * Finishes an error from the OAuth2 authorization service.
@@ -67,7 +43,7 @@ let tokenData = {};
  * service.
  */
 function handleError(code, description) {
-  sessionStorage.removeItem(STATE_TOKEN);
+  sessionStorage.removeItem(STATE_TOKEN_KEY);
 
   // Remove parameters from the URL, as set by the error callback from the
   // OAuth2 authorization service, to clean up the URL.
@@ -103,7 +79,7 @@ function getAccessTokenFromParams(params) {
     return null;
   }
 
-  const stateToken = sessionStorage.getItem(STATE_TOKEN);
+  const stateToken = sessionStorage.getItem(STATE_TOKEN_KEY);
 
   // The state param must be exactly the same as the state token we
   // have saved in the session (to prevent CSRF)
@@ -131,11 +107,8 @@ function handleCallback() {
   const params = queryStringParser(location.hash); // Remove # from hash string
   const accessToken = getAccessTokenFromParams(params);
   if (accessToken) {
-    tokenData = accessTokenParser(accessToken);
-    sessionStorage.setItem(ACCESS_TOKEN, accessToken);
-    returnPath = sessionStorage.getItem(RETURN_PATH);
-    sessionStorage.removeItem(RETURN_PATH);
-    sessionStorage.removeItem(STATE_TOKEN);
+    sessionStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
+    sessionStorage.removeItem(STATE_TOKEN_KEY);
 
     // Clean up URL; remove query and hash
     // https://stackoverflow.com/questions/4508574/remove-hash-from-url
@@ -149,23 +122,13 @@ function handleCallback() {
  * @returns {string} The access token.
  */
 export function getAccessToken() {
-  return sessionStorage.getItem(ACCESS_TOKEN);
-}
-
-/**
- * Restores the access token from session storage when available.
- */
-function restoreAccessToken() {
-  const accessToken = getAccessToken();
-  if (accessToken) {
-    tokenData = accessTokenParser(accessToken);
-  }
+  return sessionStorage.getItem(ACCESS_TOKEN_KEY);
 }
 
 /**
  * Redirects to the OAuth2 authorization service.
  */
-export function login(scopes) {
+export function login(auth_root, scopes) {
   // Get the URI the OAuth2 authorization service needs to use as callback
   const callback = encodeURIComponent(`${location.protocol}//${location.host}${location.pathname}`);
   // Get a random string to prevent CSRF
@@ -176,16 +139,15 @@ export function login(scopes) {
     throw new Error("crypto library is not available on the current browser");
   }
 
-  sessionStorage.removeItem(ACCESS_TOKEN);
-  sessionStorage.setItem(RETURN_PATH, location.hash);
-  sessionStorage.setItem(STATE_TOKEN, stateToken);
+  sessionStorage.removeItem(ACCESS_TOKEN_KEY);
+  sessionStorage.setItem(STATE_TOKEN_KEY, stateToken);
 
   const encodedScopes = encodeURIComponent(scopes.join(" "));
-  location.assign(`${API_ROOT}${AUTH_PATH}&scope=${encodedScopes}&state=${encodedStateToken}&redirect_uri=${callback}`);
+  location.assign(`${auth_root}${AUTH_PATH}&scope=${encodedScopes}&state=${encodedStateToken}&redirect_uri=${callback}`);
 }
 
 export function logout() {
-  sessionStorage.removeItem(ACCESS_TOKEN);
+  sessionStorage.removeItem(ACCESS_TOKEN_KEY);
   location.reload();
 }
 
@@ -198,32 +160,12 @@ export function logout() {
  *
  */
 export function initAuth() {
-  returnPath = "";
-  restoreAccessToken(); // Restore acces token from session storage
   catchError(); // Catch any error from the OAuth2 authorization service
   handleCallback(); // Handle a callback from the OAuth2 authorization service
 }
 
-/**
- * Gets the return path that was saved before the login process was initiated.
- *
- * @returns {string} The return path where we moved away from when the login
- * process was initiated.
- */
-export function getReturnPath() {
-  return returnPath;
-}
-
 export function isAuthenticated() {
   return Boolean(getAccessToken());
-}
-
-export function getScopes() {
-  return tokenData.scopes || [];
-}
-
-export function getName() {
-  return tokenData.name || "";
 }
 
 /**
