@@ -14,8 +14,8 @@ export default function(table, scraperMapping, token, doneCallback) {
   // NOTE: only use documented fields from table.tableInfo!
   // Other fields will not be presented in the actual Tableau environment!!!
   // See https://tableau.github.io/webdataconnector/docs/api_ref.html#webdataconnectorapi.tableinfo-1
-  const { id, requiresAuthentication } = table.tableInfo;
-  const { endPoint, apiToSchemaMapper } = scraperMapping[id];
+  const { id } = table.tableInfo;
+  const { endPoint, requiresAuthentication, apiToSchemaMapper } = scraperMapping[id];
 
   // set auth headers
   if (requiresAuthentication && token) {
