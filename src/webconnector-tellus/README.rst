@@ -1,5 +1,5 @@
 
-Webconnector code.
+Tellus Webconnector code.
 ==================
 
 A quick overview
@@ -11,10 +11,7 @@ shared:
 
 webconnectors:
 
-        afval.js - garbadge containers (no auth needed).
-
-        signals.js - download signals data. (needs AUTH).
-
+        tellus - Traffic count data
 
 You can download / git checkout the webconnector simulator
 
@@ -38,12 +35,10 @@ Test  web connectors in the simulator
 run the datapunt catalog docker, volume mount the source code for easy editing and testing.
 
 
-In the simulator load the following urls. npm start will also run a proxy
-server taking care of cors headers.
+In the simulator load the following url.
 
 
-        http://localhost:8889/127.0.0.1:8089/webconnector/signals.html
-        http://localhost:8889/127.0.0.1:8089/webconnector/afval.html
+        http://localhost:8080/webconnector/tellus/
 
 
 for auth to work a redirect url needs to be added to the authz service in

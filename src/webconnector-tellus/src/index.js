@@ -141,13 +141,16 @@ tellusConnector.init = function(initCallback) {
 
 // Download the data
 tellusConnector.getData = function(table, doneCallback) {
-  scraper(table, scraperMapping, tableau.password, doneCallback);
+  const limit = parseInt(tableau.connectionData);
+  scraper(table, scraperMapping, tableau.password, doneCallback, limit);
 };
 
 // Create event listeners for when the user submits the form
 $(document).ready(function() {
   $("#submitButton").click(function() {
     tableau.connectionName = "Tellus"; // This will be the data source name in Tableau
+    const limitValue = $("input[type='radio'][name='limit']:checked").val();
+    tableau.connectionData = limitValue;
     tableau.submit(); // This sends the connector object to Tableau
   });
 

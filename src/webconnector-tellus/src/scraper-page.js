@@ -3,7 +3,7 @@ import bluebird from 'bluebird';
 
 const PARALLEL_CALLS = 5;
 
-export default function(table, scraperMapping, token, doneCallback) {
+export default function(table, scraperMapping, token, doneCallback, limit) {
   const params = {
     "format": "json",
     "detailed": 1,
@@ -27,6 +27,7 @@ export default function(table, scraperMapping, token, doneCallback) {
 
   function getPage(page) {
     console.log('getting page: ', page);
+    tableau.reportProgress(`Retrieving page ${page}`);
     params.page = page;
 
     return $.getJSON(endPoint, params, (json) => {
@@ -55,15 +56,15 @@ export default function(table, scraperMapping, token, doneCallback) {
       const itemCount = json.count;
       const totalPages = Math.ceil(itemCount / params.page_size);
 
-      const maxPages = 30;
-
       if (totalPages <= 1) {
         // done
         Promise.resolve();
       } else {
         // get more pages
-        const pages = range(2, Math.min(totalPages, maxPages) + 1);
-        console.log(pages);
+        const maxPages = limit > 0 ? Math.ceil(limit / params.page_size) : 30;
+        const numberOfPages = Math.min(totalPages, maxPages);
+        console.log(`Retrieving ${numberOfPages} pages of page size ${params.page_size}`);
+        const pages = range(2, numberOfPages + 1);
 
         // Perform multiple promises at the same time using elements of `pages` as argument to `getPage`.
         // Note order of pages is likely out of order!

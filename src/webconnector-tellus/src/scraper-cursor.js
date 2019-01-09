@@ -4,7 +4,7 @@
 // tiny bit of data
 const MAX_PAGES = 1000000;
 
-export default function(table, scraperMapping, token, doneCallback) {
+export default function(table, scraperMapping, token, doneCallback, limit) {
   const defaultParams = {
     "format": "json",
     "page_size": 5000,
@@ -64,11 +64,14 @@ export default function(table, scraperMapping, token, doneCallback) {
 
   function slurpCursorAPI() {
     let page = 1;
-
+    const maxPages = limit > 0 ? Math.ceil(limit / defaultParams.page_size) : MAX_PAGES;
+    console.log(`Retrieving up to ${maxPages} pages of page size ${defaultParams.page_size}`);
+    
     function getEndpointPromiseLoop(json) {
       const next = json._links.next && json._links.next.href;
       page += 1;
-      return next && page <= MAX_PAGES
+      next && page <= maxPages && tableau.reportProgress(`Retrieved page ${page}, total rows ${page * defaultParams.page_size}`);
+      return next && page <= maxPages
         ? getEndpoint(next)
           .then(getEndpointPromiseLoop)
           .catch((error) => {
