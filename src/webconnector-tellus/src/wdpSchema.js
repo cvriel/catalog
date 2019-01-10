@@ -177,3 +177,147 @@ export const tellingTotaalUurdagSnelheidTable = {
     }
   ],
 };
+
+
+
+
+export const tellingYMHTable = {
+  id: "telling_ymh",
+  alias: "Telling jaar maand uur dag_type",
+  columns: [
+    {
+      id: "id",
+      alias: "id",
+      dataType: tableau.dataTypeEnum.int
+    },{
+      id: "tellus_id",
+      alias: "Tellus id",
+      dataType: tableau.dataTypeEnum.int
+    },{
+      id: "richting",
+      alias: "Richting (niet richting table row id, maar 'direction')",
+      dataType: tableau.dataTypeEnum.int
+    },{
+      id: "jaar",
+      alias: "Jaar",
+      dataType: tableau.dataTypeEnum.int
+    },{
+      id: "maand",
+      alias: "Maand",
+      dataType: tableau.dataTypeEnum.int
+    },{
+      id: "uur",
+      alias: "Uur",
+      dataType: tableau.dataTypeEnum.int
+    },{
+      id: "dag_type",
+      alias: "Dag type",
+      dataType: tableau.dataTypeEnum.string
+    },{
+      id: "aantal",
+      alias: "Aantal",
+      dataType: tableau.dataTypeEnum.int
+    }
+  ],
+};
+
+export const tellingYMHLengthTable = {
+  id: "telling_ymh_lengte",
+  alias: "Telling jaar maand uur dag_type lengte",
+  columns: [
+    // ...tellingTotaalUurdagTable.columns,
+    {
+      id: "id",
+      alias: "id",
+      dataType: tableau.dataTypeEnum.int
+    },{
+      id: "tellus_id",
+      alias: "Tellus id",
+      dataType: tableau.dataTypeEnum.int
+    },{
+      id: "richting",
+      alias: "Richting (niet richting table row id, maar 'direction')",
+      dataType: tableau.dataTypeEnum.int
+    },{
+      id: "jaar",
+      alias: "Jaar",
+      dataType: tableau.dataTypeEnum.int
+    },{
+      id: "maand",
+      alias: "Maand",
+      dataType: tableau.dataTypeEnum.int
+    },{
+      id: "uur",
+      alias: "Uur",
+      dataType: tableau.dataTypeEnum.int
+    },{
+      id: "dag_type",
+      alias: "Dag type",
+      dataType: tableau.dataTypeEnum.string
+    },{
+      id: "aantal",
+      alias: "Aantal",
+      dataType: tableau.dataTypeEnum.int
+    },
+    {
+      id: "lengte_interval_id",
+      alias: "Lengte interval id",
+      dataType: tableau.dataTypeEnum.int
+    },{
+      id: "lengte_label",
+      alias: "Lengte label",
+      dataType: tableau.dataTypeEnum.string
+    }
+  ],
+};
+
+export const tellingYMHSpeedTable = {
+  id: "telling_ymh_snelheid",
+  alias: "Telling jaar maand uur dag_type snelheid",
+  columns: [
+    // ...tellingTotaalUurdagTable.columns,
+    {
+      id: "id",
+      alias: "id",
+      dataType: tableau.dataTypeEnum.int
+    },{
+      id: "tellus_id",
+      alias: "Tellus id",
+      dataType: tableau.dataTypeEnum.int
+    },{
+      id: "richting",
+      alias: "Richting (niet richting table row id, maar 'direction')",
+      dataType: tableau.dataTypeEnum.int
+    },{
+      id: "jaar",
+      alias: "Jaar",
+      dataType: tableau.dataTypeEnum.int
+    },{
+      id: "maand",
+      alias: "Maand",
+      dataType: tableau.dataTypeEnum.int
+    },{
+      id: "uur",
+      alias: "Uur",
+      dataType: tableau.dataTypeEnum.int
+    },{
+      id: "dag_type",
+      alias: "Dag type",
+      dataType: tableau.dataTypeEnum.string
+    },{
+      id: "aantal",
+      alias: "Aantal",
+      dataType: tableau.dataTypeEnum.int
+    },
+    {
+      id: "snelheids_interval_id",
+      alias: "Snelheids interval id",
+      dataType: tableau.dataTypeEnum.int
+    },{
+      id: "snelheids_label",
+      alias: "Snelheids label",
+      dataType: tableau.dataTypeEnum.string
+    }
+  ],
+};
+
