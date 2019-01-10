@@ -5,7 +5,7 @@ import scraper from './scraper.js';
 import {
   tellingTotaalUurdagLengteTable,
   tellingTotaalUurdagSnelheidTable,
-  tellingTotaalUurdagTable,
+  tellingTotaalUurdagTable, tellingYMHLengthTable, tellingYMHSpeedTable, tellingYMHTable,
   tellusTable,
   telRichtingTable
 } from "./wdpSchema";
@@ -64,7 +64,7 @@ const scraperMapping = {
   },
   [tellingTotaalUurdagTable.id]: {
     endPoint: API_ROOT + 'telling_totaal_uur_dag/',
-    paginationType: PAGINATION_TYPE.CURSOR,
+    paginationType: PAGINATION_TYPE.PAGE,
     requiresAuthentication: true,
     apiToSchemaMapper: (result) => ({
       "id": result.id,
@@ -77,7 +77,7 @@ const scraperMapping = {
   },
   [tellingTotaalUurdagLengteTable.id]: {
     endPoint: API_ROOT + 'telling_totaal_uur_lengte_dag/',
-    paginationType: PAGINATION_TYPE.CURSOR,
+    paginationType: PAGINATION_TYPE.PAGE,
     requiresAuthentication: true,
     apiToSchemaMapper: (result) => ({
       "id": result.id,
@@ -93,13 +93,62 @@ const scraperMapping = {
   },
   [tellingTotaalUurdagSnelheidTable.id]: {
     endPoint: API_ROOT + 'telling_totaal_uur_snelheid_dag/',
-    paginationType: PAGINATION_TYPE.CURSOR,
+    paginationType: PAGINATION_TYPE.PAGE,
     requiresAuthentication: true,
     apiToSchemaMapper: (result) => ({
       "id": result.id,
       "tellus_id": result.tellus,
       "richting_id": result.richting_id,
       "dag_uur": result.dag_uur,
+      "dag_type": result.dag_type,
+      "aantal": result.aantal,
+      "snelheids_interval_id": result.snelheids_interval_id,
+      "snelheids_label": result.snelheids_label,
+    })
+  },
+  [tellingYMHTable.id]: {
+    endPoint: API_ROOT + 'telling_totaal_ymh/',
+    paginationType: PAGINATION_TYPE.PAGE,
+    requiresAuthentication: true,
+    apiToSchemaMapper: (result) => ({
+      "id": result.id,
+      "tellus_id": result.tellus,
+      "richting": result.richting,
+      "jaar": result.year,
+      "maand": result.month,
+      "uur": result.hour,
+      "dag_type": result.dag_type,
+      "aantal": result.aantal,
+    })
+  },
+  [tellingYMHLengthTable.id]: {
+    endPoint: API_ROOT + 'telling_totaal_ymh_lengte/',
+    paginationType: PAGINATION_TYPE.PAGE,
+    requiresAuthentication: true,
+    apiToSchemaMapper: (result) => ({
+      "id": result.id,
+      "tellus_id": result.tellus,
+      "richting": result.richting,
+      "jaar": result.year,
+      "maand": result.month,
+      "uur": result.hour,
+      "dag_type": result.dag_type,
+      "aantal": result.aantal,
+      "lengte_interval_id": result.lengte_interval_id,
+      "lengte_label": result.lengte_label,
+    })
+  },
+  [tellingYMHSpeedTable.id]: {
+    endPoint: API_ROOT + 'telling_totaal_ymh_snelheid/',
+    paginationType: PAGINATION_TYPE.PAGE,
+    requiresAuthentication: true,
+    apiToSchemaMapper: (result) => ({
+      "id": result.id,
+      "tellus_id": result.tellus,
+      "richting": result.richting,
+      "jaar": result.year,
+      "maand": result.month,
+      "uur": result.hour,
       "dag_type": result.dag_type,
       "aantal": result.aantal,
       "snelheids_interval_id": result.snelheids_interval_id,
@@ -123,6 +172,9 @@ tellusConnector.getSchema = function(schemaCallback) {
     tellingTotaalUurdagTable,
     tellingTotaalUurdagLengteTable,
     tellingTotaalUurdagSnelheidTable,
+    tellingYMHTable,
+    tellingYMHLengthTable,
+    tellingYMHSpeedTable,
   ]);
 };
 

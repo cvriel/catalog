@@ -1,13 +1,9 @@
-
-// Allows limiting max results
-// Useful for limiting results when using Tableau web connector simulator, because it can't handle a more than a
-// tiny bit of data
 const MAX_PAGES = 1000000;
 
 export default function(table, scraperMapping, token, doneCallback, limit) {
   const defaultParams = {
     "format": "json",
-    "page_size": 5000,
+    "page_size": 20000,
   };
 
   // NOTE: only use documented fields from table.tableInfo!
@@ -66,7 +62,7 @@ export default function(table, scraperMapping, token, doneCallback, limit) {
     let page = 1;
     const maxPages = limit > 0 ? Math.ceil(limit / defaultParams.page_size) : MAX_PAGES;
     console.log(`Retrieving up to ${maxPages} pages of page size ${defaultParams.page_size}`);
-    
+
     function getEndpointPromiseLoop(json) {
       const next = json._links.next && json._links.next.href;
       page += 1;

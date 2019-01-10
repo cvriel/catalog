@@ -2,13 +2,13 @@ import range from 'lodash.range';
 import bluebird from 'bluebird';
 
 const PARALLEL_CALLS = 5;
+const MAX_PAGES = 1000000;
 
 export default function(table, scraperMapping, token, doneCallback, limit) {
   const params = {
     "format": "json",
     "detailed": 1,
-    "page_size": 1000, //1000 resulted in too many canceled response
-    // "page_size": 5, //1000 resulted in too many canceled response
+    "page_size": 20000,
   };
 
   // NOTE: only use documented fields from table.tableInfo!
@@ -60,7 +60,7 @@ export default function(table, scraperMapping, token, doneCallback, limit) {
         Promise.resolve();
       } else {
         // get more pages
-        const maxPages = limit > 0 ? Math.ceil(limit / params.page_size) : 30;
+        const maxPages = limit > 0 ? Math.ceil(limit / params.page_size) : MAX_PAGES;
         const numberOfPages = Math.min(totalPages, maxPages);
         console.log(`Retrieving ${numberOfPages} pages of page size ${params.page_size}`);
         const pages = range(2, numberOfPages + 1);
