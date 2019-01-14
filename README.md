@@ -1,9 +1,9 @@
-# catalog
-Catalogus voor de DataPunt APIs
+# Catalog
+List of DataPunt APIs along with browsable API, documentation and more.
 
-the webpage at api.data.amsterdam.nl
+The page is available at: [api.data.amsterdam.nl](https://api.data.amsterdam.nl)
 
 ## Local development
-For information on how to run the Web Data Connector simulator see: \
-```src/webconnector/README.rst``` or \
+For information on how to run the Web Data Connector see:
+```src/webconnector/README.rst``` or
 ```src/webconnector-tellus/README.rst```
