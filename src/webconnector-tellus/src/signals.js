@@ -1,4 +1,26 @@
-import { getAuthHeaders } from "./auth.js";
+import {
+  getAuthHeaders,
+  initAuth,
+  isAuthenticated,
+  login
+} from "./auth";
+
+const SCOPES = [
+  "SIG/ALL"
+];
+
+let auth_root;
+let api_root;
+if (window.location.host.includes("acc") ||
+  window.location.host.includes("127.0.0.1") ||
+  window.location.host.includes("localhost")
+) {
+  auth_root = "https://acc.api.data.amsterdam.nl/";
+  api_root = "https://acc.api.data.amsterdam.nl/";
+} else {
+  auth_root = "https://api.data.amsterdam.nl/";
+  api_root = "https://api.data.amsterdam.nl/";
+}
 
 (function() {
 
@@ -108,11 +130,6 @@ import { getAuthHeaders } from "./auth.js";
   myConnector.init = function(initCallback) {
     tableau.authType = tableau.authTypeEnum.custom;
 
-    // If we are in the auth phase we only want to show the UI needed for auth
-    if (tableau.phase == tableau.phaseEnum.authPhase) {
-      $("#getvenuesbutton").css("display", "none");
-    }
-
     if (tableau.phase == tableau.phaseEnum.gatherDataPhase) {
       // If API that WDC is using has an enpoint that checks
       // the validity of an access token, that could be used here.
@@ -120,16 +137,16 @@ import { getAuthHeaders } from "./auth.js";
       // is invalid.
     }
 
-    var accessToken = getAuthHeaders().Authorization;
-    var hasAuth = (accessToken && accessToken.length > 0) || tableau.password.length > 0;
-    updateUIWithAuthState(hasAuth);
+    const accessToken = getAuthHeaders().Authorization;
+    const hasAuthenticated = (accessToken && accessToken.length > 0) || tableau.password.length > 0;
+    updateUIWithAuthState(hasAuthenticated);
 
     initCallback();
 
     // If we are not in the data gathering phase, we want to store the token
     // This allows us to access the token in the data gathering phase
     if (tableau.phase == tableau.phaseEnum.interactivePhase || tableau.phase == tableau.phaseEnum.authPhase) {
-      if (hasAuth) {
+      if (hasAuthenticated) {
         tableau.password = accessToken;
 
         if (tableau.phase == tableau.phaseEnum.authPhase) {
@@ -147,7 +164,7 @@ import { getAuthHeaders } from "./auth.js";
     // var dateObj = JSON.parse(tableau.connectionData),
     // dateString = "starttime=" + dateObj.startDate + "&endtime=" + dateObj.endDate,
 
-    var apiCall = window.auth.API_ROOT + "signals/auth/signal/";  // + dateString + "";
+    var apiCall = api_root + "signals/auth/signal/";  // + dateString + "";
     // var apiCall = "http://localhost:8760/localhost:8000/signals/auth/signal/";  // + dateString + "";
 
     var params = {
@@ -264,17 +281,10 @@ import { getAuthHeaders } from "./auth.js";
 
   };
 
-  // This function togglels the label shown depending
+  // This function toggles the label shown depending
   // on whether or not the user has been authenticated
   function updateUIWithAuthState(hasAuth) {
-    if (hasAuth) {
-      $(".notsignedin").css("display", "none");
-      $(".signedin").css("display", "block");
-    } else {
-      $(".notsignedin").css("display", "block");
-      $(".signedin").css("display", "none");
-    }
-
+    document.querySelector('body').className = hasAuth ? 'authenticated' : 'not-authenticated';
   }
 
   $(document).ready(function() {
@@ -283,13 +293,12 @@ import { getAuthHeaders } from "./auth.js";
       tableau.submit(); // This sends the connector object to Tableau
     });
 
-    window.auth.initAuth();
+    initAuth();
 
-    var hasauth = window.auth.isAuthenticated();
-    updateUIWithAuthState(hasauth);
+    updateUIWithAuthState(isAuthenticated());
 
-    $("#loginButton").click(function() {
-      window.auth.login();
+    document.querySelector('#loginButton').addEventListener('click', () => {
+      login(auth_root, SCOPES);
     });
   });
 

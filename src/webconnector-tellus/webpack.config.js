@@ -6,6 +6,7 @@ const dist = path.resolve(__dirname, "dist");
 
 module.exports = {
   mode: "development",
+  devtool: 'cheap-module-eval-source-map',
   entry: {
     afval: ["@babel/polyfill", "./src/afval.js"],
     signals: ["@babel/polyfill", "./src/signals.js"],
@@ -14,6 +15,7 @@ module.exports = {
   output: {
     path: dist,
     filename: '[name].js',
+    publicPath: 'webconnector/' // Serves files on localhost:8080/webconnector/ as well as localhost:8080/
   },
   plugins: [
     new CopyWebpackPlugin([
