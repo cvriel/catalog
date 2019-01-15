@@ -7,8 +7,9 @@ const dist = path.resolve(__dirname, "dist");
 module.exports = {
   mode: "development",
   entry: {
-    tellus: ["@babel/polyfill", "./src/tellus.js"],
     afval: ["@babel/polyfill", "./src/afval.js"],
+    signals: ["@babel/polyfill", "./src/signals.js"],
+    tellus: ["@babel/polyfill", "./src/tellus.js"],
   },
   output: {
     path: dist,
@@ -17,8 +18,9 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin([
       { from: 'src/static/' },
-      { from: 'tellus.html' },
       { from: 'afval.html' },
+      { from: 'signals.html' },
+      { from: 'tellus.html' },
     ]),
     new WriteFilePlugin() // Allows using copy webpack plugin with dev server
   ],
