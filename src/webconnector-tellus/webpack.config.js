@@ -8,17 +8,16 @@ module.exports = {
   mode: "development",
   entry: [
     "@babel/polyfill",
-    "./src/index.js"
+    "./src/tellus.js"
   ],
   output: {
     path: dist,
-    filename: "bundle.js",
-    publicPath: 'webconnector/tellus/'
+    filename: "bundle.js"
   },
   plugins: [
     new CopyWebpackPlugin([
       { from: 'src/static/' },
-      { from: 'index.html' }
+      { from: 'tellus.html' }
     ]),
     new WriteFilePlugin() // Allows using copy webpack plugin with dev server
   ],
@@ -34,7 +33,9 @@ module.exports = {
               ["@babel/preset-env", {
                 useBuiltIns: 'entry',
                 "targets": {
-                  // Don't know exact Tableau wdc version, but it's old, so IE6 will stand as an old browser stand in.
+                  // Don't know exact Tableau wdc version, but it's old, so IE6 will stand in as an "old" browser.
+                  // From Tableau 2019.2 a chromium based browser is used. That should make it a lot more resilient
+                  // and potent. -src: https://tableau.github.io/webdataconnector/news/#the-reason-for-this-change
                   IE: 6
                 },
                 "debug": true

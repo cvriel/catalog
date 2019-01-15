@@ -1,7 +1,7 @@
 import "@babel/polyfill";
 import 'url-search-params-polyfill';
 
-import scraper from './scraper.js';
+import scraper from './scraper/scraper.js';
 import {
   tellingTotaalUurdagLengteTable,
   tellingTotaalUurdagSnelheidTable,
