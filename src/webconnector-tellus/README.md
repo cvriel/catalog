@@ -1,60 +1,64 @@
+# Web Data Connector
 
-Tellus Webconnector code.
-==================
+Tableau web data connectors, linking tableau data format to APIs using JavaScript.
 
-A quick overview
+There are three web connectors at the moment:
+* afval.html
+* signals.html
+* tellus.html
 
-
-shared:
-
-        auth.js - Does the oauth2 dance to get a access token
-
-webconnectors:
-
-        tellus - Traffic count data
-
-You can download / git checkout the webconnector simulator
-
-
-        http://tableau.github.io/webdataconnector/docs/
-
-        git clone https://github.com/tableau/webdataconnector.git
-
-        npm install --production
-
-        npm start
-
-Now you will have a simulator running on:
-
-        http://localhost:8888/Simulator/index.html
+The web connectors are available on:
+* https://acc.api.data.amsterdam.nl/webconnector/afval.html
+* https://acc.api.data.amsterdam.nl/webconnector/signals.html
+* https://acc.api.data.amsterdam.nl/webconnector/tellus.html
+* https://api.data.amsterdam.nl/webconnector/afval.html
+* https://api.data.amsterdam.nl/webconnector/signals.html
+* https://api.data.amsterdam.nl/webconnector/tellus.html
 
 
-Test  web connectors in the simulator
-===================
+## Development 
+The web connectors consist of a HTML page and related JavaScript (JS) code.
+The JavaScript code is transpiled from modern JS to very old JS so the Tableau desktop API can handle it using Webpack and Babel.
 
-run the datapunt catalog docker, volume mount the source code for easy editing and testing.
+Install the requirements using: `npm install`.
 
+Start the development server using: `npm start'.`
 
-In the simulator load the following url.
+The web data connector are now be available on: `http://localhost:8080/afval.html` and so on.
 
+### Simulator
+To test the web connector you can use the Tableau web data connector simulator.
+The simulator is installed and started with:
 
-        http://localhost:8080/webconnector/tellus/
+```
+git clone https://github.com/tableau/webdataconnector.git
+npm install --production
+npm start
+```
 
+The simulator is available on: http://localhost:8888/Simulator/index.html
 
-for auth to work a redirect url needs to be added to the authz service in
+Point the simulator to your web connector, for example: http://localhost:8080/afval.html. 
+
+The [docs](http://tableau.github.io/webdataconnector/docs/) are very useful.
+Note that the simulator is quite different from the Tableau desktop app, most notably,
+it can't handle large datasets (rendering is to slow) and many JS features don't work (e.g.: fetch).  
+
+### Authentication / authorization
+
+For authentication to work a redirect url needs to be added to the authz service in
 the Openstack project located here.
 
-roles/authz/templates/authz.config.toml.j2
+`roles/authz/templates/authz.config.toml.j2`
 
 examples:
 
-    http://localhost:8889/127.0.0.1:8089/webconnector/signals.html
-    http%3A%2F%2Flocalhost%3A8889%2F127.0.0.1%3A8089%2Fwebconnector%2Fsignals.html
-    https://acc.api.data.amsterdam.nl/webconnector/afval.html
-
+```
+http://localhost:8889/127.0.0.1:8089/webconnector/signals.html
+http%3A%2F%2Flocalhost%3A8889%2F127.0.0.1%3A8089%2Fwebconnector%2Fsignals.html
+https://acc.api.data.amsterdam.nl/webconnector/afval.html
+```
 
 update the acceptance auth service
 
-        ansible-playbook deploy-authz.yml
-
-
+```ansible-playbook deploy-authz.yml```
