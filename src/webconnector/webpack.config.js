@@ -4,9 +4,11 @@ const path = require("path");
 
 const dist = path.resolve(__dirname, "dist");
 
+const isDev = env => env.NODE_ENV === 'development';
+
 module.exports = {
-  mode: "development",
-  devtool: 'cheap-module-eval-source-map',
+  mode: isDev(process.env) ? 'development' : 'production',
+  devtool: isDev(process.env)? 'cheap-module-eval-source-map' : 'cheap-module-source-map',
   entry: {
     afval: ["@babel/polyfill", "./src/afval.js"],
     signals: ["@babel/polyfill", "./src/signals.js"],
