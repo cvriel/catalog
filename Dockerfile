@@ -1,21 +1,13 @@
 # Build
-FROM node:10.14.2 AS build-deps
+FROM node:10.15.0 AS build-deps
 MAINTAINER datapunt.ois@amsterdam.nl
 
-COPY src/webconnector/js /build
-
-WORKDIR /build/
-
-RUN npm install -D -g webpack webpack-cli
-RUN npm install -D babel-loader @babel/polyfill @babel/core @babel/preset-env
-
-RUN webpack
-
-COPY src/webconnector-tellus /build-tellus
-WORKDIR /build-tellus
+COPY src /build
+WORKDIR /build/webconnector
 RUN npm install && \
   npm cache clean --force
-RUN webpack
+RUN npm run build
+
 
 # webserver image.
 FROM nginx:1.15.7
@@ -25,7 +17,6 @@ ENV BASE_URL=https://api.data.amsterdam.nl/
 COPY cmd.sh /usr/local/bin/
 RUN chmod 755 /usr/local/bin/cmd.sh
 
-COPY src/ /usr/share/nginx/html/
-COPY --from=build-deps /build/dist/ /usr/share/nginx/html/webconnector/js/dist/
-COPY --from=build-deps /build-tellus/dist/ /usr/share/nginx/html/webconnector/tellus/
+COPY static/ /usr/share/nginx/html/
+COPY --from=build-deps /build/webconnector/dist/ /usr/share/nginx/html/webconnector/
 CMD cmd.sh

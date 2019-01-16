@@ -3,7 +3,7 @@ services:
   web:
     build: .
     ports:
-      - "8089:80"
+      - "8080:80"
     environment:
       BASE_URL: "https://acc.api.data.amsterdam.nl/"
     #volumes:
