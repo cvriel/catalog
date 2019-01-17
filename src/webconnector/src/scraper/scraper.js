@@ -1,6 +1,6 @@
 import scraperPage from './scraper-page.js';
 import scraperCursor from './scraper-cursor.js';
-import { PAGINATION_TYPE } from './paginationType';
+import { PAGINATION_TYPE } from '../paginationType';
 
 export default function(table, scraperMapping, token, doneCallback, limit) {
   const {id} = table.tableInfo;

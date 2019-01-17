@@ -1,7 +1,7 @@
 import "@babel/polyfill";
 import 'url-search-params-polyfill';
 
-import scraper from './scraper.js';
+import scraper from './scraper/scraper.js';
 import {
   tellingTotaalUurdagLengteTable,
   tellingTotaalUurdagSnelheidTable,
@@ -30,7 +30,7 @@ if (window.location.host.includes("acc") ||
   window.location.host.includes("127.0.0.1") ||
   window.location.host.includes("localhost")
 ) {
-  auth_root   = "https://acc.api.data.amsterdam.nl/";
+  auth_root = "https://acc.api.data.amsterdam.nl/";
 } else {
   auth_root = "https://api.data.amsterdam.nl/";
 }
@@ -157,8 +157,8 @@ const scraperMapping = {
   }
 };
 
-const updateUIWithAuthState = isAuthenticated => {
-  document.querySelector('body').className = isAuthenticated ? 'authenticated' : 'not-authenticated';
+const updateUIWithAuthState = hasAuth => {
+  document.querySelector('body').className = hasAuth ? 'authenticated' : 'not-authenticated';
 };
 
 // Create the connector object
