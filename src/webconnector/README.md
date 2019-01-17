@@ -62,3 +62,10 @@ https://acc.api.data.amsterdam.nl/webconnector/afval.html
 update the acceptance auth service
 
 ```ansible-playbook deploy-authz.yml```
+
+### Testing
+
+Run test using:
+```
+npm test
+``` 

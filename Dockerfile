@@ -8,6 +8,8 @@ RUN npm install && npm cache clean --force
 COPY src /build
 RUN npm run build
 
+COPY /deploy /deploy
+
 
 # webserver image.
 FROM nginx:1.15.7

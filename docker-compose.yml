@@ -14,5 +14,4 @@ services:
       context: .
       target: build-deps
     environment:
-      - NODE_ENV=development
-    command: "npm run lint && npm test"
+      - NODE_ENV=test
