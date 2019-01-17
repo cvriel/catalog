@@ -321,3 +321,13 @@ export const tellingYMHSpeedTable = {
   ],
 };
 
+export default [
+  tellusTable,
+  telRichtingTable,
+  tellingTotaalUurdagTable,
+  tellingTotaalUurdagLengteTable,
+  tellingTotaalUurdagSnelheidTable,
+  tellingYMHTable,
+  tellingYMHLengthTable,
+  tellingYMHSpeedTable,
+];

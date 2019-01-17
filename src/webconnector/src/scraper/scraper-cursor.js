@@ -1,6 +1,7 @@
 const MAX_PAGES = 1000000;
 
-export default function(table, scraperMapping, token, doneCallback, limit) {
+export default function(table, scraperMapping, token, options, doneCallback) {
+  const { limit } = options;
   const defaultParams = {
     "format": "json",
     "page_size": 20000,
