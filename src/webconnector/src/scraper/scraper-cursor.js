@@ -3,8 +3,8 @@ const MAX_PAGES = 1000000;
 export default function(table, scraperMapping, token, options, doneCallback) {
   const { limit } = options;
   const defaultParams = {
-    "format": "json",
-    "page_size": 20000,
+    'format': 'json',
+    'page_size': 20000,
   };
 
   // NOTE: only use documented fields from table.tableInfo!
@@ -16,7 +16,7 @@ export default function(table, scraperMapping, token, options, doneCallback) {
   // set auth headers
   if (requiresAuthentication && token) {
     $.ajaxSetup({
-      headers : { "Authorization": token }
+      headers : { 'Authorization': token }
     });
   }
 
@@ -25,8 +25,8 @@ export default function(table, scraperMapping, token, options, doneCallback) {
     // Hack to prevent $.getJSON from adding duplicate get parameters,
     // parameters already present in the endpoint are merged with default parameters
     // using JS object spreading removing duplicates.
-    const bareEndpoint = endpoint.split("?")[0];
-    const urlParams = new URLSearchParams(endpoint.split("?")[1]);
+    const bareEndpoint = endpoint.split('?')[0];
+    const urlParams = new URLSearchParams(endpoint.split('?')[1]);
     const params = { ...defaultParams };
     const entries = Array.from(urlParams.entries());
     entries.forEach( ([key, value]) => params[key]= value);
@@ -72,10 +72,10 @@ export default function(table, scraperMapping, token, options, doneCallback) {
         ? getEndpoint(next)
           .then(getEndpointPromiseLoop)
           .catch((error) => {
-            console.error(`Couldn\'t load page ${id}, page: ${page}, ${next}: `, error);
+            console.error(`Couldn't load page ${id}, page: ${page}, ${next}: `, error);
             throw error;
           })
-        : Promise.resolve()
+        : Promise.resolve();
     }
 
     const { endPoint } = scraperMapping[id];
@@ -91,5 +91,5 @@ export default function(table, scraperMapping, token, options, doneCallback) {
   }).catch((e) => {
     console.error('Cancelling...', e);
     doneCallback();
-  })
-};
+  });
+}

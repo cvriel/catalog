@@ -1,4 +1,4 @@
-import "@babel/polyfill";
+import '@babel/polyfill';
 import 'url-search-params-polyfill';
 
 import tellusSchema, {
@@ -10,11 +10,11 @@ import tellusSchema, {
   tellingYMHTable,
   tellusTable,
   telRichtingTable
-} from "./tellusSchema";
-import { PAGINATION_TYPE } from './paginationType';
-import { initAuth, login } from "./auth";
-import createConnector from "./createConnector";
-import getRoots from "./apiRoot";
+} from './tellusSchema';
+import { PAGINATION_TYPE } from './scraper/paginationType';
+import { initAuth, login } from './auth';
+import createConnector from './createConnector';
+import getRoots from './apiRoot';
 
 const SCOPES = ['TLLS/R'];
 const { apiRoot, authRoot } = getRoots();
@@ -26,10 +26,10 @@ const scraperMapping = {
     paginationType: PAGINATION_TYPE.PAGE,
     requiresAuthentication: true,
     apiToSchemaMapper: (result) => ({
-      "tellus_id": result.tellus,
-      "richting": result.richting,
-      "naam": result.naam,
-      "zijstraat": result.zijstraat
+      'tellus_id': result.tellus,
+      'richting': result.richting,
+      'naam': result.naam,
+      'zijstraat': result.zijstraat
     })
   },
   [tellusTable.id]: {
@@ -37,14 +37,14 @@ const scraperMapping = {
     paginationType: PAGINATION_TYPE.PAGE,
     requiresAuthentication: true,
     apiToSchemaMapper: (result) => ({
-      "id": result.id,
-      "objnr_vor": result.objnr_vor,
-      "objnr_leverancier": result.objnr_leverancier,
-      "meetlocatie_id": result.meetlocatie.id,
-      "meetlocatie_naam": result.meetlocatie.name,
-      "latitude": result.latitude,
-      "longitude": result.longitude,
-      "snelheids_categorie": result.snelheids_categorie
+      'id': result.id,
+      'objnr_vor': result.objnr_vor,
+      'objnr_leverancier': result.objnr_leverancier,
+      'meetlocatie_id': result.meetlocatie.id,
+      'meetlocatie_naam': result.meetlocatie.name,
+      'latitude': result.latitude,
+      'longitude': result.longitude,
+      'snelheids_categorie': result.snelheids_categorie
     })
   },
   [tellingTotaalUurdagTable.id]: {
@@ -52,12 +52,12 @@ const scraperMapping = {
     paginationType: PAGINATION_TYPE.PAGE,
     requiresAuthentication: true,
     apiToSchemaMapper: (result) => ({
-      "id": result.id,
-      "tellus_id": result.tellus,
-      "richting_id": result.richting_id,
-      "dag_uur": result.dag_uur,
-      "dag_type": result.dag_type,
-      "aantal": result.aantal
+      'id': result.id,
+      'tellus_id': result.tellus,
+      'richting_id': result.richting_id,
+      'dag_uur': result.dag_uur,
+      'dag_type': result.dag_type,
+      'aantal': result.aantal
     })
   },
   [tellingTotaalUurdagLengteTable.id]: {
@@ -65,14 +65,14 @@ const scraperMapping = {
     paginationType: PAGINATION_TYPE.PAGE,
     requiresAuthentication: true,
     apiToSchemaMapper: (result) => ({
-      "id": result.id,
-      "tellus_id": result.tellus,
-      "richting_id": result.richting_id,
-      "dag_uur": result.dag_uur,
-      "dag_type": result.dag_type,
-      "aantal": result.aantal,
-      "lengte_interval_id": result.lengte_interval_id,
-      "lengte_label": result.lengte_label,
+      'id': result.id,
+      'tellus_id': result.tellus,
+      'richting_id': result.richting_id,
+      'dag_uur': result.dag_uur,
+      'dag_type': result.dag_type,
+      'aantal': result.aantal,
+      'lengte_interval_id': result.lengte_interval_id,
+      'lengte_label': result.lengte_label,
 
     })
   },
@@ -81,14 +81,14 @@ const scraperMapping = {
     paginationType: PAGINATION_TYPE.PAGE,
     requiresAuthentication: true,
     apiToSchemaMapper: (result) => ({
-      "id": result.id,
-      "tellus_id": result.tellus,
-      "richting_id": result.richting_id,
-      "dag_uur": result.dag_uur,
-      "dag_type": result.dag_type,
-      "aantal": result.aantal,
-      "snelheids_interval_id": result.snelheids_interval_id,
-      "snelheids_label": result.snelheids_label,
+      'id': result.id,
+      'tellus_id': result.tellus,
+      'richting_id': result.richting_id,
+      'dag_uur': result.dag_uur,
+      'dag_type': result.dag_type,
+      'aantal': result.aantal,
+      'snelheids_interval_id': result.snelheids_interval_id,
+      'snelheids_label': result.snelheids_label,
     })
   },
   [tellingYMHTable.id]: {
@@ -96,14 +96,14 @@ const scraperMapping = {
     paginationType: PAGINATION_TYPE.PAGE,
     requiresAuthentication: true,
     apiToSchemaMapper: (result) => ({
-      "id": result.id,
-      "tellus_id": result.tellus,
-      "richting": result.richting,
-      "jaar": result.year,
-      "maand": result.month,
-      "uur": result.hour,
-      "dag_type": result.dag_type,
-      "aantal": result.aantal,
+      'id': result.id,
+      'tellus_id': result.tellus,
+      'richting': result.richting,
+      'jaar': result.year,
+      'maand': result.month,
+      'uur': result.hour,
+      'dag_type': result.dag_type,
+      'aantal': result.aantal,
     })
   },
   [tellingYMHLengthTable.id]: {
@@ -111,16 +111,16 @@ const scraperMapping = {
     paginationType: PAGINATION_TYPE.PAGE,
     requiresAuthentication: true,
     apiToSchemaMapper: (result) => ({
-      "id": result.id,
-      "tellus_id": result.tellus,
-      "richting": result.richting,
-      "jaar": result.year,
-      "maand": result.month,
-      "uur": result.hour,
-      "dag_type": result.dag_type,
-      "aantal": result.aantal,
-      "lengte_interval_id": result.lengte_interval_id,
-      "lengte_label": result.lengte_label,
+      'id': result.id,
+      'tellus_id': result.tellus,
+      'richting': result.richting,
+      'jaar': result.year,
+      'maand': result.month,
+      'uur': result.hour,
+      'dag_type': result.dag_type,
+      'aantal': result.aantal,
+      'lengte_interval_id': result.lengte_interval_id,
+      'lengte_label': result.lengte_label,
     })
   },
   [tellingYMHSpeedTable.id]: {
@@ -128,16 +128,16 @@ const scraperMapping = {
     paginationType: PAGINATION_TYPE.PAGE,
     requiresAuthentication: true,
     apiToSchemaMapper: (result) => ({
-      "id": result.id,
-      "tellus_id": result.tellus,
-      "richting": result.richting,
-      "jaar": result.year,
-      "maand": result.month,
-      "uur": result.hour,
-      "dag_type": result.dag_type,
-      "aantal": result.aantal,
-      "snelheids_interval_id": result.snelheids_interval_id,
-      "snelheids_label": result.snelheids_label,
+      'id': result.id,
+      'tellus_id': result.tellus,
+      'richting': result.richting,
+      'jaar': result.year,
+      'maand': result.month,
+      'uur': result.hour,
+      'dag_type': result.dag_type,
+      'aantal': result.aantal,
+      'snelheids_interval_id': result.snelheids_interval_id,
+      'snelheids_label': result.snelheids_label,
     })
   }
 };
@@ -150,14 +150,14 @@ const scraperOptions = {
 };
 
 const connector = createConnector(tellusSchema, scraperMapping, scraperOptions);
-tableau.connectionName = "Tellus"; // This will be the data source name in Tableau
+tableau.connectionName = 'Tellus'; // This will be the data source name in Tableau
 tableau.registerConnector(connector);
 
 $(document).ready(function() {
   initAuth();
 
   document.querySelector('#submitButton').addEventListener('click', () => {
-    const limitValue = $("input[type='radio'][name='limit']:checked").val();
+    const limitValue = $('input[type=\'radio\'][name=\'limit\']:checked').val();
     tableau.connectionData = limitValue;
     tableau.submit(); // This sends the connector object to Tableau
   });

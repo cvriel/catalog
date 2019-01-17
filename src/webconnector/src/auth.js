@@ -1,39 +1,39 @@
-import queryStringParser from "./query-string-parser/query-string-parser.js";
-import stateTokenGenerator from "./state-token-generator/state-token-generator.js";
+import queryStringParser from './query-string-parser/query-string-parser.js';
+import stateTokenGenerator from './state-token-generator/state-token-generator.js';
 
 // A map of the error keys, that the OAuth2 authorization service can
 // return, to a full description
 const ERROR_MESSAGES = {
-  invalid_request: "The request is missing a required parameter, includes an invalid parameter value, " +
-    "includes a parameter more than once, or is otherwise malformed.",
-  unauthorized_client: "The client is not authorized to request an access token using this method.",
-  access_denied: "The resource owner or authorization server denied the request.",
-  unsupported_response_type: "The authorization server does not support obtaining an access token using " +
-    "this method.",
-  invalid_scope: "The requested scope is invalid, unknown, or malformed.",
-  server_error: "The authorization server encountered an unexpected condition that prevented it from " +
-    "fulfilling the request.",
-  temporarily_unavailable: "The authorization server is currently unable to handle the request due to a " +
-    "temporary overloading or maintenance of the server."
+  invalid_request: 'The request is missing a required parameter, includes an invalid parameter value, ' +
+    'includes a parameter more than once, or is otherwise malformed.',
+  unauthorized_client: 'The client is not authorized to request an access token using this method.',
+  access_denied: 'The resource owner or authorization server denied the request.',
+  unsupported_response_type: 'The authorization server does not support obtaining an access token using ' +
+    'this method.',
+  invalid_scope: 'The requested scope is invalid, unknown, or malformed.',
+  server_error: 'The authorization server encountered an unexpected condition that prevented it from ' +
+    'fulfilling the request.',
+  temporarily_unavailable: 'The authorization server is currently unable to handle the request due to a ' +
+    'temporary overloading or maintenance of the server.'
 };
 
 // The parameters the OAuth2 authorization service will return on
 // success
-const AUTH_PARAMS = ["access_token", "token_type", "expires_in", "state"];
+const AUTH_PARAMS = ['access_token', 'token_type', 'expires_in', 'state'];
 
 // The URI we need to redirect to for communication with the OAuth2
 // authorization service
-export const AUTH_PATH = `oauth2/authorize?idp_id=datapunt&response_type=token&client_id=tableau_webconnectors`;
+export const AUTH_PATH = 'oauth2/authorize?idp_id=datapunt&response_type=token&client_id=tableau_webconnectors';
 
 //
 // The keys of values we need to store in the session storage
 //
 // The OAuth2 state(token) (OAuth terminology, has nothing to do with
 // our app state), which is a random string
-const STATE_TOKEN_KEY = "stateToken";
+const STATE_TOKEN_KEY = 'stateToken';
 // The access token returned by the OAuth2 authorization service
 // containing user scopes and name
-const ACCESS_TOKEN_KEY = "accessToken";
+const ACCESS_TOKEN_KEY = 'accessToken';
 
 /**
  * Finishes an error from the OAuth2 authorization service.
@@ -49,7 +49,7 @@ function handleError(code, description) {
   // OAuth2 authorization service, to clean up the URL.
   location.assign(`${location.protocol}//${location.host}${location.pathname}`);
 
-  throw new Error("Authorization service responded with error " +
+  throw new Error('Authorization service responded with error ' +
       `${code} [${description}] (${ERROR_MESSAGES[code]})`);
 }
 
@@ -112,7 +112,7 @@ function handleCallback() {
 
     // Clean up URL; remove query and hash
     // https://stackoverflow.com/questions/4508574/remove-hash-from-url
-    history.replaceState("", document.title, window.location.pathname);
+    history.replaceState('', document.title, window.location.pathname);
   }
 }
 
@@ -136,13 +136,13 @@ export function login(auth_root, scopes) {
   const encodedStateToken = encodeURIComponent(stateToken);
 
   if (!stateToken) {
-    throw new Error("crypto library is not available on the current browser");
+    throw new Error('crypto library is not available on the current browser');
   }
 
   sessionStorage.removeItem(ACCESS_TOKEN_KEY);
   sessionStorage.setItem(STATE_TOKEN_KEY, stateToken);
 
-  const encodedScopes = encodeURIComponent(scopes.join(" "));
+  const encodedScopes = encodeURIComponent(scopes.join(' '));
   location.assign(`${auth_root}${AUTH_PATH}&scope=${encodedScopes}&state=${encodedStateToken}&redirect_uri=${callback}`);
 }
 

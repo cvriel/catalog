@@ -1,8 +1,8 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WriteFilePlugin = require('write-file-webpack-plugin');
-const path = require("path");
+const path = require('path');
 
-const dist = path.resolve(__dirname, "dist");
+const dist = path.resolve(__dirname, 'dist');
 
 const isDev = env => env.NODE_ENV === 'development';
 
@@ -10,9 +10,9 @@ module.exports = {
   mode: isDev(process.env) ? 'development' : 'production',
   devtool: isDev(process.env)? 'cheap-module-eval-source-map' : 'cheap-module-source-map',
   entry: {
-    afval: ["@babel/polyfill", "./src/afval.js"],
-    signals: ["@babel/polyfill", "./src/signals.js"],
-    tellus: ["@babel/polyfill", "./src/tellus.js"],
+    afval: ['@babel/polyfill', './src/afval.js'],
+    signals: ['@babel/polyfill', './src/signals.js'],
+    tellus: ['@babel/polyfill', './src/tellus.js'],
   },
   output: {
     path: dist,
@@ -34,23 +34,23 @@ module.exports = {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
         use: {
-          loader:  "babel-loader",
+          loader:  'babel-loader',
           options: {
             presets: [
-              ["@babel/preset-env", {
+              ['@babel/preset-env', {
                 useBuiltIns: 'entry',
-                "targets": {
+                'targets': {
                   // Don't know exact Tableau wdc version, but it's old, so IE6 will stand in as an "old" browser.
                   // From Tableau 2019.2 a chromium based browser is used. That should make it a lot more resilient
                   // and potent. -src: https://tableau.github.io/webdataconnector/news/#the-reason-for-this-change
                   IE: 6
                 },
-                "debug": true
+                'debug': true
               }]
             ],
             plugins: [
-              ["@babel/plugin-transform-spread"],
-              ["@babel/plugin-transform-regenerator"]
+              ['@babel/plugin-transform-spread'],
+              ['@babel/plugin-transform-regenerator']
             ]
           }
         }

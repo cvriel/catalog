@@ -1,5 +1,5 @@
-import { getAuthHeaders } from "./auth";
-import scraper from "./scraper/scraper";
+import { getAuthHeaders } from './auth';
+import scraper from './scraper/scraper';
 
 function updateUIWithAuthState(hasAuth) {
   document.querySelector('body').className = hasAuth ? 'authenticated' : 'not-authenticated';

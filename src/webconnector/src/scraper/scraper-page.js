@@ -9,8 +9,8 @@ export default function(table, scraperMapping, token, options, doneCallback) {
   } = options;
 
   const params = {
-    "format": "json",
-    "page_size": 100,
+    'format': 'json',
+    'page_size': 100,
     ...additionalParams
   };
 
@@ -23,7 +23,7 @@ export default function(table, scraperMapping, token, options, doneCallback) {
   // set auth headers
   if (requiresAuthentication && token) {
     $.ajaxSetup({
-      headers : { "Authorization": token }
+      headers : { 'Authorization': token }
     });
   }
 
@@ -80,7 +80,7 @@ export default function(table, scraperMapping, token, options, doneCallback) {
         );
       }
     } catch (error) {
-      console.error(`Couldn\'t load page ${id}: `, error);
+      console.error(`Couldn't load page ${id}: `, error);
       console.error('Cancelling...');
       doneCallback();
     }
@@ -93,4 +93,4 @@ export default function(table, scraperMapping, token, options, doneCallback) {
     console.log(`Done loading API ${diff/1000}s`);
     doneCallback();
   });
-};
+}
