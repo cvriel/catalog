@@ -6,7 +6,7 @@ import createConnector from './createConnector';
 import getRoots from './apiRoot';
 
 const { apiRoot } = getRoots();
-const signalApiRoot = apiRoot + 'afval/v1/';
+const afvalApiRoot = apiRoot + 'afval/v1/';
 
 const tableId = 'container';
 const schema = [
@@ -64,7 +64,7 @@ const schema = [
 
 const scraperMapping = {
   [tableId]: {
-    endPoint: signalApiRoot + 'containers/',
+    endPoint: afvalApiRoot + 'containers/',
     paginationType: PAGINATION_TYPE.PAGE,
     apiToSchemaMapper: (result) => {
       const row = {
@@ -104,8 +104,6 @@ tableau.registerConnector(connector);
 
 $(document).ready(function () {
   document.querySelector('#submitButton').addEventListener('click', () => {
-    const limitValue = $('input[type=\'radio\'][name=\'limit\']:checked').val();
-    tableau.connectionData = limitValue;
     tableau.submit(); // This sends the connector object to Tableau
   });
 });

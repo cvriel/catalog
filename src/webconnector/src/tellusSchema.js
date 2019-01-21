@@ -98,7 +98,6 @@ export const tellingTotaalUurdagLengteTable = {
   id: 'telling_totaal_uur_dag_lengte',
   alias: 'Telling samengevoegd per uur per lengte',
   columns: [
-    // ...tellingTotaalUurdagTable.columns,
     {
       id: 'id',
       alias: 'id',
@@ -140,7 +139,6 @@ export const tellingTotaalUurdagSnelheidTable = {
   id: 'telling_totaal_uur_dag_snelheid',
   alias: 'Telling samengevoegd per uur per snelheid',
   columns: [
-    // ...tellingTotaalUurdagTable.columns,
     {
       id: 'id',
       alias: 'id',
@@ -225,7 +223,6 @@ export const tellingYMHLengthTable = {
   id: 'telling_ymh_lengte',
   alias: 'Telling jaar maand uur dag_type lengte',
   columns: [
-    // ...tellingTotaalUurdagTable.columns,
     {
       id: 'id',
       alias: 'id',
@@ -275,7 +272,6 @@ export const tellingYMHSpeedTable = {
   id: 'telling_ymh_snelheid',
   alias: 'Telling jaar maand uur dag_type snelheid',
   columns: [
-    // ...tellingTotaalUurdagTable.columns,
     {
       id: 'id',
       alias: 'id',
