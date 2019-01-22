@@ -2,11 +2,13 @@
 FROM node:10.15.0 AS build-deps
 MAINTAINER datapunt.ois@amsterdam.nl
 
-COPY src /build
+COPY src/webconnector/package*.json /build/webconnector/
 WORKDIR /build/webconnector
-RUN npm install && \
-  npm cache clean --force
+RUN npm install && npm cache clean --force
+COPY src /build
 RUN npm run build
+
+COPY /deploy /deploy
 
 
 # webserver image.

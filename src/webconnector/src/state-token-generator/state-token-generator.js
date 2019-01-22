@@ -19,7 +19,7 @@ export default function () {
   }
 
   // Create an array of 16 8-bit unsigned integers
-  const list = new Uint8Array(16);
+  const list = new Uint8Array(16); // eslint-disable-line no-undef
   // Populate the array with random values
   cryptoLib.getRandomValues(list);
 

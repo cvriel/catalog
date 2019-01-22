@@ -1,18 +1,21 @@
 import range from 'lodash.range';
 import bluebird from 'bluebird';
 
-const PARALLEL_CALLS = 5;
-const MAX_PAGES = 1000000;
+export default function(table, scraperMapping, token, options, doneCallback) {
+  const {
+    limit,
+    parallel = 5,
+    params:additionalParams
+  } = options;
 
-export default function(table, scraperMapping, token, doneCallback, limit) {
   const params = {
-    "format": "json",
-    "detailed": 1,
-    "page_size": 20000,
+    'format': 'json',
+    'page_size': 100,
+    ...additionalParams
   };
 
   // NOTE: only use documented fields from table.tableInfo!
-  // Other fields will not be presented in the actual Tableau environment!!!
+  // Other fields will not be presented in the actual Tableau (desktop) environment!!!
   // See https://tableau.github.io/webdataconnector/docs/api_ref.html#webdataconnectorapi.tableinfo-1
   const { id } = table.tableInfo;
   const { endPoint, requiresAuthentication, apiToSchemaMapper } = scraperMapping[id];
@@ -20,14 +23,18 @@ export default function(table, scraperMapping, token, doneCallback, limit) {
   // set auth headers
   if (requiresAuthentication && token) {
     $.ajaxSetup({
-      headers : { "Authorization": token }
+      headers : { 'Authorization': token }
     });
   }
 
   function getPage(page) {
-    console.log('getting page: ', page);
     tableau.reportProgress(`Retrieving page ${page}`);
+
     params.page = page;
+    if (limit > 0 && params.page_size > limit) {
+      // Limit page_size so we don't overfetch
+      params.page_size = limit;
+    }
 
     return $.getJSON(endPoint, params, (json) => {
       const results = json.results;
@@ -60,8 +67,7 @@ export default function(table, scraperMapping, token, doneCallback, limit) {
         Promise.resolve();
       } else {
         // get more pages
-        const maxPages = limit > 0 ? Math.ceil(limit / params.page_size) : MAX_PAGES;
-        const numberOfPages = Math.min(totalPages, maxPages);
+        const numberOfPages = limit > 0 ? Math.ceil(limit / params.page_size) : totalPages;
         console.log(`Retrieving ${numberOfPages} pages of page size ${params.page_size}`);
         const pages = range(2, numberOfPages + 1);
 
@@ -70,11 +76,11 @@ export default function(table, scraperMapping, token, doneCallback, limit) {
         return bluebird.map(
           pages,
           getPage,
-          {concurrency: PARALLEL_CALLS}
+          {concurrency: parallel}
         );
       }
     } catch (error) {
-      console.error(`Couldn\'t load page ${id}: `, error);
+      console.error(`Couldn't load page ${id}: `, error);
       console.error('Cancelling...');
       doneCallback();
     }
@@ -87,4 +93,4 @@ export default function(table, scraperMapping, token, doneCallback, limit) {
     console.log(`Done loading API ${diff/1000}s`);
     doneCallback();
   });
-};
+}
