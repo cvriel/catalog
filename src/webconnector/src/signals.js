@@ -125,7 +125,7 @@ const scraperMapping = {
 
 const scraperOptions = {
   params: {
-    page_size: 100
+    page_size: 10000
   }
 };
 
