@@ -14,10 +14,10 @@ const fetchJsonOnce = (url, params) => {
     return $.getJSON(url, params, json => {
       resolve(json);
     })
-    .fail((error) => {
-      reject(`fetchJson error: "${error.statusText}"`);
-    })
-  })
+      .fail((error) => {
+        reject(`fetchJson error: "${error.statusText}"`);
+      });
+  });
 };
 
 /**

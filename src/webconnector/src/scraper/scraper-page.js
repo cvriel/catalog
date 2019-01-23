@@ -83,7 +83,7 @@ export default function(table, scraperMapping, token, options, doneCallback) {
         const tableData = [];
 
         if (results === undefined || results.length === 0) {
-          throw new Error(`unexpected results: ${result}`);
+          throw new Error(`unexpected results: ${results}`);
         } else {
           results.forEach(result => {
             const row = apiToSchemaMapper(result);
