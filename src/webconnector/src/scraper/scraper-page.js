@@ -20,6 +20,10 @@ export default function(table, scraperMapping, token, options, doneCallback) {
   const { id } = table.tableInfo;
   const { endPoint, requiresAuthentication, apiToSchemaMapper } = scraperMapping[id];
 
+  let numberOfPages;
+  let loadedCount = 0;
+  let retrieving = [];
+
   // set auth headers
   if (requiresAuthentication && token) {
     $.ajaxSetup({
@@ -27,8 +31,29 @@ export default function(table, scraperMapping, token, options, doneCallback) {
     });
   }
 
+  const logProgress = () => {
+    const loadedMessage = `Loaded: ${loadedCount} of ${numberOfPages ? numberOfPages : '?'} pages`;
+    const message = retrieving.length == 0
+      ? loadedMessage
+      : `${loadedMessage}, retrieving page(s): ${retrieving.join(', ')}`;
+    console.log(message);
+    tableau.reportProgress(message);
+  };
+
+  const logPageLoad = page => {
+    retrieving.push(page);
+    logProgress();
+  };
+
+  const logPageDone = page => {
+    console.log('data loaded for page ', page);
+    retrieving.splice(retrieving.indexOf(page), 1 );
+    loadedCount += 1;
+    logProgress();
+  };
+
   function getPage(page) {
-    tableau.reportProgress(`Retrieving page ${page}`);
+    logPageLoad(page);
 
     params.page = page;
     if (limit > 0 && params.page_size > limit) {
@@ -49,8 +74,8 @@ export default function(table, scraperMapping, token, options, doneCallback) {
           tableData.push(row);
         });
         table.appendRows(tableData);
-        console.log('data loaded for page ', page);
       }
+      logPageDone(page);
       return json;
     });
   }
@@ -67,7 +92,7 @@ export default function(table, scraperMapping, token, options, doneCallback) {
         Promise.resolve();
       } else {
         // get more pages
-        const numberOfPages = limit > 0 ? Math.ceil(limit / params.page_size) : totalPages;
+        numberOfPages = limit > 0 ? Math.ceil(limit / params.page_size) : totalPages;
         console.log(`Retrieving ${numberOfPages} pages of page size ${params.page_size}`);
         const pages = range(2, numberOfPages + 1);
 
