@@ -1,5 +1,6 @@
 import range from 'lodash.range';
 import bluebird from 'bluebird';
+import fetchJson from './fetchJson';
 
 export default function(table, scraperMapping, token, options, doneCallback) {
   const {
@@ -8,7 +9,7 @@ export default function(table, scraperMapping, token, options, doneCallback) {
     params:additionalParams
   } = options;
 
-  const params = {
+  const defaultParams = {
     'format': 'json',
     'page_size': 100,
     ...additionalParams
@@ -20,6 +21,11 @@ export default function(table, scraperMapping, token, options, doneCallback) {
   const { id } = table.tableInfo;
   const { endPoint, requiresAuthentication, apiToSchemaMapper } = scraperMapping[id];
 
+  let errorLogged = false;
+  let numberOfPages;
+  let loadedCount = 0;
+  let retrieving = [];
+
   // set auth headers
   if (requiresAuthentication && token) {
     $.ajaxSetup({
@@ -27,32 +33,67 @@ export default function(table, scraperMapping, token, options, doneCallback) {
     });
   }
 
-  function getPage(page) {
-    tableau.reportProgress(`Retrieving page ${page}`);
+  const logError = message => {
+    errorLogged = true;
+    console.error(message);
+    tableau.reportProgress(message);
+  };
 
-    params.page = page;
+  const logProgress = () => {
+    const loadedMessage = `Loaded: ${loadedCount} of ${numberOfPages ? numberOfPages : '?'} pages`;
+    const message = retrieving.length == 0
+      ? loadedMessage
+      : `${loadedMessage}, retrieving page(s): ${retrieving.join(', ')}`;
+    console.log(message);
+
+    if (!errorLogged) {
+      // Only log progress if no error has occurred, or else we may overwrite error report.
+      tableau.reportProgress(message);
+    }
+  };
+
+  const logPageLoad = page => {
+    retrieving.push(page);
+    logProgress();
+  };
+
+  const logPageDone = page => {
+    console.log('data loaded for page ', page);
+    retrieving.splice(retrieving.indexOf(page), 1 );
+    loadedCount += 1;
+    logProgress();
+  };
+
+  function getPage(page) {
+    logPageLoad(page);
+
+    const params = {
+      ...defaultParams,
+      page: page
+    };
+
     if (limit > 0 && params.page_size > limit) {
       // Limit page_size so we don't overfetch
       params.page_size = limit;
     }
 
-    return $.getJSON(endPoint, params, (json) => {
-      const results = json.results;
-      const tableData = [];
+    return fetchJson(endPoint, params)
+      .then(json => {
+        const results = json.results;
+        const tableData = [];
 
-      if (results === undefined || results.length === 0) {
-        console.error('unexpected results: ', results);
-        return;
-      } else {
-        results.forEach(result => {
-          const row = apiToSchemaMapper(result);
-          tableData.push(row);
-        });
-        table.appendRows(tableData);
-        console.log('data loaded for page ', page);
-      }
-      return json;
-    });
+        if (results === undefined || results.length === 0) {
+          throw new Error(`unexpected results: ${results}`);
+        } else {
+          results.forEach(result => {
+            const row = apiToSchemaMapper(result);
+            tableData.push(row);
+          });
+          table.appendRows(tableData);
+        }
+        logPageDone(page);
+        return json;
+      });
   }
 
   async function slurpAPI() {
@@ -60,15 +101,15 @@ export default function(table, scraperMapping, token, options, doneCallback) {
       const json = await getPage(1);
 
       const itemCount = json.count;
-      const totalPages = Math.ceil(itemCount / params.page_size);
+      const totalPages = Math.ceil(itemCount / defaultParams.page_size);
 
       if (totalPages <= 1) {
         // done
         Promise.resolve();
       } else {
         // get more pages
-        const numberOfPages = limit > 0 ? Math.ceil(limit / params.page_size) : totalPages;
-        console.log(`Retrieving ${numberOfPages} pages of page size ${params.page_size}`);
+        numberOfPages = limit > 0 ? Math.ceil(limit / defaultParams.page_size) : totalPages;
+        console.log(`Retrieving ${numberOfPages} pages of page size ${defaultParams.page_size}`);
         const pages = range(2, numberOfPages + 1);
 
         // Perform multiple promises at the same time using elements of `pages` as argument to `getPage`.
@@ -92,5 +133,9 @@ export default function(table, scraperMapping, token, options, doneCallback) {
     const diff = performance.now() - t0; // milliseconds
     console.log(`Done loading API ${diff/1000}s`);
     doneCallback();
+  }).catch(error => {
+    logError(`"${error}". Stopping...`);
+    // Delay calling doneCallBack so error is visible in Tableau desktop
+    setTimeout(doneCallback, 10000); // Delay in ms
   });
 }
