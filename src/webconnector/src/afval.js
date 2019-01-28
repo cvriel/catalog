@@ -54,6 +54,10 @@ const schema = [
         alias: 'site',
         dataType: tableau.dataTypeEnum.string
       }, {
+        id: 'site_short',
+        alias: 'site_short',
+        dataType: tableau.dataTypeEnum.int
+      }, {
         id: 'placing_date',
         alias: 'placing date',
         dataType: tableau.dataTypeEnum.date
@@ -81,7 +85,10 @@ const scraperMapping = {
         row.lon = result.well.geometrie.coordinates[0];
         row.lat = result.well.geometrie.coordinates[1];
         row.buurt_code = result.well.buurt_code;
-        row.site = result.well.site;
+        if(result.well.site !== null) {
+          row.site = result.well.site.id;
+          row.site_short = result.well.site.short_id;
+        }
       }
       if(row.placing_date !== null) {
         row.placing_date = row.placing_date.toString().slice(0, 10);
@@ -93,8 +100,10 @@ const scraperMapping = {
 
 const scraperOptions = {
   params: {
-    detailed: 1,
-    page_size: 1000
+    //detailed: 1,
+    page_size: 1000,
+    fields: 'id,id_number,container_type,placing_date,waste_name,well.geometrie,well.buurt_code,active,address,lat,lon,volume,well.site.id,well.site.short_id',
+    expand: 'well,well.site',
   }
 };
 
