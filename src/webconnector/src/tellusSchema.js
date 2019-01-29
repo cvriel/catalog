@@ -62,123 +62,6 @@ export const telRichtingTable = {
   ]
 };
 
-export const tellingTotaalUurdagTable = {
-  id: 'telling_totaal_uur_dag',
-  alias: 'Telling samengevoegd per uur',
-  columns: [
-    {
-      id: 'id',
-      alias: 'id',
-      dataType: tableau.dataTypeEnum.int
-    },{
-      id: 'tellus_id',
-      alias: 'Tellus id',
-      dataType: tableau.dataTypeEnum.int
-    },{
-      id: 'richting_id',
-      alias: 'Richting id',
-      dataType: tableau.dataTypeEnum.int
-    },{
-      id: 'dag_uur',
-      alias: 'Dag uur gemeten',
-      dataType: tableau.dataTypeEnum.string
-    },{
-      id: 'dag_type',
-      alias: 'Dag type',
-      dataType: tableau.dataTypeEnum.string
-    },{
-      id: 'aantal',
-      alias: 'Aantal',
-      dataType: tableau.dataTypeEnum.int
-    }
-  ],
-};
-
-export const tellingTotaalUurdagLengteTable = {
-  id: 'telling_totaal_uur_dag_lengte',
-  alias: 'Telling samengevoegd per uur per lengte',
-  columns: [
-    {
-      id: 'id',
-      alias: 'id',
-      dataType: tableau.dataTypeEnum.int
-    },{
-      id: 'tellus_id',
-      alias: 'Tellus id',
-      dataType: tableau.dataTypeEnum.int
-    },{
-      id: 'richting_id',
-      alias: 'Richting id',
-      dataType: tableau.dataTypeEnum.int
-    },{
-      id: 'dag_uur',
-      alias: 'Dag uur gemeten',
-      dataType: tableau.dataTypeEnum.string
-    },{
-      id: 'dag_type',
-      alias: 'Dag type',
-      dataType: tableau.dataTypeEnum.string
-    },{
-      id: 'aantal',
-      alias: 'Aantal',
-      dataType: tableau.dataTypeEnum.int
-    },
-    {
-      id: 'lengte_interval_id',
-      alias: 'Lengte interval id',
-      dataType: tableau.dataTypeEnum.int
-    },{
-      id: 'lengte_label',
-      alias: 'Lengte label',
-      dataType: tableau.dataTypeEnum.string
-    }
-  ],
-};
-
-export const tellingTotaalUurdagSnelheidTable = {
-  id: 'telling_totaal_uur_dag_snelheid',
-  alias: 'Telling samengevoegd per uur per snelheid',
-  columns: [
-    {
-      id: 'id',
-      alias: 'id',
-      dataType: tableau.dataTypeEnum.int
-    },{
-      id: 'tellus_id',
-      alias: 'Tellus id',
-      dataType: tableau.dataTypeEnum.int
-    },{
-      id: 'richting_id',
-      alias: 'Richting id',
-      dataType: tableau.dataTypeEnum.int
-    },{
-      id: 'dag_uur',
-      alias: 'Dag uur gemeten',
-      dataType: tableau.dataTypeEnum.string
-    },{
-      id: 'dag_type',
-      alias: 'Dag type',
-      dataType: tableau.dataTypeEnum.string
-    },{
-      id: 'aantal',
-      alias: 'Aantal',
-      dataType: tableau.dataTypeEnum.int
-    },
-    {
-      id: 'snelheids_interval_id',
-      alias: 'Snelheids interval id',
-      dataType: tableau.dataTypeEnum.int
-    },{
-      id: 'snelheids_label',
-      alias: 'Snelheids label',
-      dataType: tableau.dataTypeEnum.string
-    }
-  ],
-};
-
-
-
-
 export const tellingYMHTable = {
   id: 'telling_ymh',
   alias: 'Telling jaar maand uur dag_type',
@@ -214,6 +97,10 @@ export const tellingYMHTable = {
     },{
       id: 'aantal',
       alias: 'Aantal',
+      dataType: tableau.dataTypeEnum.int
+    },{
+      id: 'aantal_dagen',
+      alias: 'Aantal dagen',
       dataType: tableau.dataTypeEnum.int
     }
   ],
@@ -264,6 +151,10 @@ export const tellingYMHLengthTable = {
       id: 'lengte_label',
       alias: 'Lengte label',
       dataType: tableau.dataTypeEnum.string
+    },{
+      id: 'aantal_dagen',
+      alias: 'Aantal dagen',
+      dataType: tableau.dataTypeEnum.int
     }
   ],
 };
@@ -313,6 +204,10 @@ export const tellingYMHSpeedTable = {
       id: 'snelheids_label',
       alias: 'Snelheids label',
       dataType: tableau.dataTypeEnum.string
+    },{
+      id: 'aantal_dagen',
+      alias: 'Aantal dagen',
+      dataType: tableau.dataTypeEnum.int
     }
   ],
 };
@@ -320,9 +215,6 @@ export const tellingYMHSpeedTable = {
 export default [
   tellusTable,
   telRichtingTable,
-  tellingTotaalUurdagTable,
-  tellingTotaalUurdagLengteTable,
-  tellingTotaalUurdagSnelheidTable,
   tellingYMHTable,
   tellingYMHLengthTable,
   tellingYMHSpeedTable,

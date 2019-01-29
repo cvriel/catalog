@@ -2,9 +2,6 @@ import '@babel/polyfill';
 import 'url-search-params-polyfill';
 
 import tellusSchema, {
-  tellingTotaalUurdagLengteTable,
-  tellingTotaalUurdagSnelheidTable,
-  tellingTotaalUurdagTable,
   tellingYMHLengthTable,
   tellingYMHSpeedTable,
   tellingYMHTable,
@@ -47,50 +44,6 @@ const scraperMapping = {
       'snelheids_categorie': result.snelheids_categorie
     })
   },
-  [tellingTotaalUurdagTable.id]: {
-    endPoint: tellusApiRoot + 'telling_totaal_uur_dag/',
-    paginationType: PAGINATION_TYPE.PAGE,
-    requiresAuthentication: true,
-    apiToSchemaMapper: (result) => ({
-      'id': result.id,
-      'tellus_id': result.tellus,
-      'richting_id': result.richting_id,
-      'dag_uur': result.dag_uur,
-      'dag_type': result.dag_type,
-      'aantal': result.aantal
-    })
-  },
-  [tellingTotaalUurdagLengteTable.id]: {
-    endPoint: tellusApiRoot + 'telling_totaal_uur_lengte_dag/',
-    paginationType: PAGINATION_TYPE.PAGE,
-    requiresAuthentication: true,
-    apiToSchemaMapper: (result) => ({
-      'id': result.id,
-      'tellus_id': result.tellus,
-      'richting_id': result.richting_id,
-      'dag_uur': result.dag_uur,
-      'dag_type': result.dag_type,
-      'aantal': result.aantal,
-      'lengte_interval_id': result.lengte_interval_id,
-      'lengte_label': result.lengte_label,
-
-    })
-  },
-  [tellingTotaalUurdagSnelheidTable.id]: {
-    endPoint: tellusApiRoot + 'telling_totaal_uur_snelheid_dag/',
-    paginationType: PAGINATION_TYPE.PAGE,
-    requiresAuthentication: true,
-    apiToSchemaMapper: (result) => ({
-      'id': result.id,
-      'tellus_id': result.tellus,
-      'richting_id': result.richting_id,
-      'dag_uur': result.dag_uur,
-      'dag_type': result.dag_type,
-      'aantal': result.aantal,
-      'snelheids_interval_id': result.snelheids_interval_id,
-      'snelheids_label': result.snelheids_label,
-    })
-  },
   [tellingYMHTable.id]: {
     endPoint: tellusApiRoot + 'telling_totaal_ymh/',
     paginationType: PAGINATION_TYPE.PAGE,
@@ -104,6 +57,7 @@ const scraperMapping = {
       'uur': result.hour,
       'dag_type': result.dag_type,
       'aantal': result.aantal,
+      'aantal_dagen': result.aantal_dagen,
     })
   },
   [tellingYMHLengthTable.id]: {
@@ -119,6 +73,7 @@ const scraperMapping = {
       'uur': result.hour,
       'dag_type': result.dag_type,
       'aantal': result.aantal,
+      'aantal_dagen': result.aantal_dagen,
       'lengte_interval_id': result.lengte_interval_id,
       'lengte_label': result.lengte_label,
     })
@@ -136,6 +91,7 @@ const scraperMapping = {
       'uur': result.hour,
       'dag_type': result.dag_type,
       'aantal': result.aantal,
+      'aantal_dagen': result.aantal_dagen,
       'snelheids_interval_id': result.snelheids_interval_id,
       'snelheids_label': result.snelheids_label,
     })
