@@ -42,13 +42,22 @@ export const telRichtingTable = {
   alias: 'Tel richtingen',
   columns: [
     {
+      id: 'id',
+      dataType: tableau.dataTypeEnum.int
+    },
+    {
       id: 'tellus_id',
       alias: 'Tellus id',
       dataType: tableau.dataTypeEnum.int
     },
     {
-      id: 'richting',
-      alias: 'Richting id',
+      id: 'tellus_naam',
+      alias: 'Tellus naam',
+      dataType: tableau.dataTypeEnum.string
+    },
+    {
+      id: 'weg_richting',
+      alias: 'Weg richting',
       dataType: tableau.dataTypeEnum.int
     }, {
       id: 'naam',
@@ -71,12 +80,8 @@ export const tellingYMHTable = {
       alias: 'id',
       dataType: tableau.dataTypeEnum.int
     },{
-      id: 'tellus_id',
-      alias: 'Tellus id',
-      dataType: tableau.dataTypeEnum.int
-    },{
-      id: 'richting',
-      alias: 'Richting (niet richting table row id, maar \'direction\')',
+      id: 'tel_richting_id',
+      alias: 'Tel richting id',
       dataType: tableau.dataTypeEnum.int
     },{
       id: 'jaar',
@@ -115,12 +120,8 @@ export const tellingYMHLengthTable = {
       alias: 'id',
       dataType: tableau.dataTypeEnum.int
     },{
-      id: 'tellus_id',
-      alias: 'Tellus id',
-      dataType: tableau.dataTypeEnum.int
-    },{
-      id: 'richting',
-      alias: 'Richting (niet richting table row id, maar \'direction\')',
+      id: 'tel_richting_id',
+      alias: 'Tel richting id',
       dataType: tableau.dataTypeEnum.int
     },{
       id: 'jaar',
@@ -168,12 +169,8 @@ export const tellingYMHSpeedTable = {
       alias: 'id',
       dataType: tableau.dataTypeEnum.int
     },{
-      id: 'tellus_id',
-      alias: 'Tellus id',
-      dataType: tableau.dataTypeEnum.int
-    },{
-      id: 'richting',
-      alias: 'Richting (niet richting table row id, maar \'direction\')',
+      id: 'tel_richting_id',
+      alias: 'Tel richting id',
       dataType: tableau.dataTypeEnum.int
     },{
       id: 'jaar',

@@ -23,8 +23,10 @@ const scraperMapping = {
     paginationType: PAGINATION_TYPE.PAGE,
     requiresAuthentication: true,
     apiToSchemaMapper: (result) => ({
-      'tellus_id': result.tellus,
-      'richting': result.richting,
+      'id': result.id,
+      'tellus_id': result.tellus.id,
+      'tellus_naam': result.tellus.meetlocatie.name,
+      'weg_richting': result.richting,
       'naam': result.naam,
       'zijstraat': result.zijstraat
     })
@@ -50,8 +52,7 @@ const scraperMapping = {
     requiresAuthentication: true,
     apiToSchemaMapper: (result) => ({
       'id': result.id,
-      'tellus_id': result.tellus,
-      'richting': result.richting,
+      'tel_richting_id': result.tel_richting,
       'jaar': result.year,
       'maand': result.month,
       'uur': result.hour,
@@ -66,8 +67,7 @@ const scraperMapping = {
     requiresAuthentication: true,
     apiToSchemaMapper: (result) => ({
       'id': result.id,
-      'tellus_id': result.tellus,
-      'richting': result.richting,
+      'tel_richting_id': result.tel_richting,
       'jaar': result.year,
       'maand': result.month,
       'uur': result.hour,
@@ -84,8 +84,7 @@ const scraperMapping = {
     requiresAuthentication: true,
     apiToSchemaMapper: (result) => ({
       'id': result.id,
-      'tellus_id': result.tellus,
-      'richting': result.richting,
+      'tel_richting_id': result.tel_richting,
       'jaar': result.year,
       'maand': result.month,
       'uur': result.hour,
