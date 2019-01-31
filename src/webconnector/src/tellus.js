@@ -6,7 +6,12 @@ import tellusSchema, {
   tellingYMHSpeedTable,
   tellingYMHTable,
   snelheidsIntervalTable,
-  telRichtingTable, lengteIntervalTable, meetraaiCategorieTable, validatieCategorieTable, representatiefCategorieTable
+  telRichtingTable,
+  lengteIntervalTable,
+  meetraaiCategorieTable,
+  validatieCategorieTable,
+  representatiefCategorieTable,
+  tellingTable
 } from './tellusSchema';
 import { PAGINATION_TYPE } from './scraper/paginationType';
 import { initAuth, login } from './auth';
@@ -92,6 +97,22 @@ const scraperMapping = {
     apiToSchemaMapper: (result) => ({
       'id': result.id,
       'label': result.label,
+    })
+  },
+  [tellingTable.id]: {
+    endPoint: tellusApiRoot + 'telling/',
+    paginationType: PAGINATION_TYPE.PAGE,
+    requiresAuthentication: true,
+    apiToSchemaMapper: (result) => ({
+      'tel_richting_id': result.tel_richting,
+      'tijd_van': result.tijd_van,
+      'tijd_tot': result.tijd_tot,
+      'aantal': result.aantal,
+      'lengte_interval_id': result.lengte_interval,
+      'snelheids_interval_id': result.snelheids_interval,
+      'meetraai_categorie_id': result.meetraai_categorie,
+      'representatief_categorie_id': result.representatief_categorie,
+      'validatie_categorie_id': result.validatie_categorie,
     })
   },
   [tellingYMHTable.id]: {

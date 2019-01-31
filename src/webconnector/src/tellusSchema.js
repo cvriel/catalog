@@ -136,7 +136,7 @@ export const snelheidsIntervalTable = {
 
 export const meetraaiCategorieTable = {
   id: 'meetraai_categorie',
-  alias: 'Meetrai mapping',
+  alias: 'Meetraai mapping',
   columns: [
     {
       id: 'id',
@@ -179,6 +179,49 @@ export const representatiefCategorieTable = {
       alias: 'Label',
       dataType: tableau.dataTypeEnum.string
     }
+  ],
+};
+
+export const tellingTable = {
+  id: 'telling',
+  alias: 'Telling per uur',
+  columns: [{
+    id: 'tel_richting_id',
+    alias: 'Tel richting id',
+    dataType: tableau.dataTypeEnum.int
+  },{
+    id: 'tijd_van',
+    alias: 'Tijd van',
+    dataType: tableau.dataTypeEnum.string
+  },{
+    id: 'tijd_tot',
+    alias: 'Tijd tot',
+    dataType: tableau.dataTypeEnum.string
+  },{
+    id: 'aantal',
+    alias: 'Aantal',
+    dataType: tableau.dataTypeEnum.int
+  },{
+    id: 'lengte_interval_id',
+    alias: 'Lengte interval id',
+    dataType: tableau.dataTypeEnum.int
+  },{
+    id: 'snelheids_interval_id',
+    alias: 'Snelheids interval id',
+    dataType: tableau.dataTypeEnum.int
+  },{
+    id: 'meetraai_categorie_id',
+    alias: 'Meetraai categorie id',
+    dataType: tableau.dataTypeEnum.int
+  },{
+    id: 'representatief_categorie_id',
+    alias: 'Representatief categorie id',
+    dataType: tableau.dataTypeEnum.int
+  },{
+    id: 'validatie_categorie_id',
+    alias: 'Validatie categorie id',
+    dataType: tableau.dataTypeEnum.int
+  }
   ],
 };
 
@@ -327,6 +370,7 @@ export default [
   meetraaiCategorieTable,
   validatieCategorieTable,
   representatiefCategorieTable,
+  tellingTable,
   tellingYMHTable,
   tellingYMHLengthTable,
   tellingYMHSpeedTable,
