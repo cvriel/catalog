@@ -5,8 +5,8 @@ import tellusSchema, {
   tellingYMHLengthTable,
   tellingYMHSpeedTable,
   tellingYMHTable,
-  tellusTable,
-  telRichtingTable
+  snelheidsIntervalTable,
+  telRichtingTable, lengteIntervalTable, meetraaiCategorieTable, validatieCategorieTable, representatiefCategorieTable
 } from './tellusSchema';
 import { PAGINATION_TYPE } from './scraper/paginationType';
 import { initAuth, login } from './auth';
@@ -25,25 +25,73 @@ const scraperMapping = {
     apiToSchemaMapper: (result) => ({
       'id': result.id,
       'tellus_id': result.tellus.id,
-      'tellus_naam': result.tellus.meetlocatie.name,
+      'objnr_vor': result.tellus.objnr_vor,
+      'objnr_leverancier': result.tellus.objnr_leverancier,
+      'meetlocatie_naam': result.tellus.meetlocatie.name,
+      'latitude': result.tellus.latitude,
+      'longitude': result.tellus.longitude,
       'weg_richting': result.richting,
       'naam': result.naam,
       'zijstraat': result.zijstraat
     })
   },
-  [tellusTable.id]: {
-    endPoint: tellusApiRoot + 'tellus/',
+  // [tellusTable.id]: {
+  //   endPoint: tellusApiRoot + 'tellus/',
+  //   paginationType: PAGINATION_TYPE.PAGE,
+  //   requiresAuthentication: true,
+  //   apiToSchemaMapper: (result) => ({
+  //     'id': result.id,
+  //     'objnr_vor': result.objnr_vor,
+  //     'objnr_leverancier': result.objnr_leverancier,
+  //     'meetlocatie_id': result.meetlocatie.id,
+  //     'meetlocatie_naam': result.meetlocatie.name,
+  //     'latitude': result.latitude,
+  //     'longitude': result.longitude,
+  //     'snelheids_categorie': result.snelheids_categorie
+  //   })
+  // },
+  [lengteIntervalTable.id]: {
+    endPoint: tellusApiRoot + 'lengte_interval/',
     paginationType: PAGINATION_TYPE.PAGE,
-    requiresAuthentication: true,
     apiToSchemaMapper: (result) => ({
       'id': result.id,
-      'objnr_vor': result.objnr_vor,
-      'objnr_leverancier': result.objnr_leverancier,
-      'meetlocatie_id': result.meetlocatie.id,
-      'meetlocatie_naam': result.meetlocatie.name,
-      'latitude': result.latitude,
-      'longitude': result.longitude,
-      'snelheids_categorie': result.snelheids_categorie
+      'label': result.label,
+      'min_cm': result.min_cm,
+      'max_cm': result.max_cm,
+    })
+  },
+  [snelheidsIntervalTable.id]: {
+    endPoint: tellusApiRoot + 'snelheids_interval/',
+    paginationType: PAGINATION_TYPE.PAGE,
+    apiToSchemaMapper: (result) => ({
+      'id': result.id,
+      'label': result.label,
+      'min_kmph': result.min_kmph,
+      'max_kmph': result.max_kmph,
+    })
+  },
+  [meetraaiCategorieTable.id]: {
+    endPoint: tellusApiRoot + 'meetraai_categorie/',
+    paginationType: PAGINATION_TYPE.PAGE,
+    apiToSchemaMapper: (result) => ({
+      'id': result.id,
+      'label': result.label,
+    })
+  },
+  [validatieCategorieTable.id]: {
+    endPoint: tellusApiRoot + 'validatie_categorie/',
+    paginationType: PAGINATION_TYPE.PAGE,
+    apiToSchemaMapper: (result) => ({
+      'id': result.id,
+      'label': result.label,
+    })
+  },
+  [representatiefCategorieTable.id]: {
+    endPoint: tellusApiRoot + 'representatief_categorie/',
+    paginationType: PAGINATION_TYPE.PAGE,
+    apiToSchemaMapper: (result) => ({
+      'id': result.id,
+      'label': result.label,
     })
   },
   [tellingYMHTable.id]: {
