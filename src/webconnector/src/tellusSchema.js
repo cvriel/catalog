@@ -51,11 +51,26 @@ export const telRichtingTable = {
       dataType: tableau.dataTypeEnum.int
     },
     {
-      id: 'tellus_naam',
-      alias: 'Tellus naam',
+      id: 'meetlocatie_naam',
+      alias: 'Meetlocatie naam',
       dataType: tableau.dataTypeEnum.string
-    },
-    {
+    }, {
+      id: 'latitude',
+      alias: 'Latitude',
+      dataType: tableau.dataTypeEnum.float
+    }, {
+      id: 'longitude',
+      alias: 'Longitude',
+      dataType: tableau.dataTypeEnum.float
+    },{
+      id: 'objnr_vor',
+      alias: 'Objectnummer V&OR',
+      dataType: tableau.dataTypeEnum.string
+    },{
+      id: 'objnr_leverancier',
+      alias: 'Objectnummer leverancier',
+      dataType: tableau.dataTypeEnum.string
+    },{
       id: 'weg_richting',
       alias: 'Weg richting',
       dataType: tableau.dataTypeEnum.int
@@ -69,6 +84,102 @@ export const telRichtingTable = {
       dataType: tableau.dataTypeEnum.string
     }
   ]
+};
+
+export const lengteIntervalTable = {
+  id: 'lengte_interval',
+  alias: 'Lengte interval mapping',
+  columns: [
+    {
+      id: 'id',
+      alias: 'id',
+      dataType: tableau.dataTypeEnum.int
+    },{
+      id: 'label',
+      alias: 'Label',
+      dataType: tableau.dataTypeEnum.string
+    },{
+      id: 'min_cm',
+      alias: 'min_cm',
+      dataType: tableau.dataTypeEnum.int
+    },{
+      id: 'max_cm',
+      alias: 'max_cm',
+      dataType: tableau.dataTypeEnum.int
+    }
+  ],
+};
+
+export const snelheidsIntervalTable = {
+  id: 'snelheids_interval',
+  alias: 'Snelheids interval mapping',
+  columns: [
+    {
+      id: 'id',
+      alias: 'id',
+      dataType: tableau.dataTypeEnum.int
+    },{
+      id: 'label',
+      alias: 'Label',
+      dataType: tableau.dataTypeEnum.string
+    },{
+      id: 'min_kmph',
+      alias: 'Minimal kilometers/h speed',
+      dataType: tableau.dataTypeEnum.int
+    },{
+      id: 'max_kmph',
+      alias: 'Maximal kilometers/h speed',
+      dataType: tableau.dataTypeEnum.int
+    }
+  ],
+};
+
+export const meetraaiCategorieTable = {
+  id: 'meetraai_categorie',
+  alias: 'Meetrai mapping',
+  columns: [
+    {
+      id: 'id',
+      alias: 'id',
+      dataType: tableau.dataTypeEnum.int
+    },{
+      id: 'label',
+      alias: 'Label',
+      dataType: tableau.dataTypeEnum.string
+    }
+  ],
+};
+
+export const validatieCategorieTable = {
+  id: 'validatie_categorie',
+  alias: 'Validatie mapping',
+  columns: [
+    {
+      id: 'id',
+      alias: 'id',
+      dataType: tableau.dataTypeEnum.int
+    },{
+      id: 'label',
+      alias: 'Label',
+      dataType: tableau.dataTypeEnum.string
+    }
+  ],
+};
+
+export const representatiefCategorieTable = {
+  id: 'representatief_categorie',
+  alias: 'Representatief mapping',
+  columns: [
+    {
+      id: 'id',
+      alias: 'id',
+      dataType: tableau.dataTypeEnum.int
+    },{
+      id: 'label',
+      alias: 'Label',
+      dataType: tableau.dataTypeEnum.string
+    }
+  ],
 };
 
 export const tellingYMHTable = {
@@ -192,8 +303,7 @@ export const tellingYMHSpeedTable = {
       id: 'aantal',
       alias: 'Aantal',
       dataType: tableau.dataTypeEnum.int
-    },
-    {
+    },{
       id: 'snelheids_interval_id',
       alias: 'Snelheids interval id',
       dataType: tableau.dataTypeEnum.int
@@ -210,8 +320,13 @@ export const tellingYMHSpeedTable = {
 };
 
 export default [
-  tellusTable,
+  // tellusTable,
   telRichtingTable,
+  lengteIntervalTable,
+  snelheidsIntervalTable,
+  meetraaiCategorieTable,
+  validatieCategorieTable,
+  representatiefCategorieTable,
   tellingYMHTable,
   tellingYMHLengthTable,
   tellingYMHSpeedTable,
