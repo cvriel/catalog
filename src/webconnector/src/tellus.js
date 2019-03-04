@@ -2,9 +2,6 @@ import '@babel/polyfill';
 import 'url-search-params-polyfill';
 
 import tellusSchema, {
-  tellingYMHLengthTable,
-  tellingYMHSpeedTable,
-  tellingYMHTable,
   snelheidsIntervalTable,
   telRichtingTable,
   lengteIntervalTable,
@@ -40,21 +37,6 @@ const scraperMapping = {
       'zijstraat': result.zijstraat
     })
   },
-  // [tellusTable.id]: {
-  //   endPoint: tellusApiRoot + 'tellus/',
-  //   paginationType: PAGINATION_TYPE.PAGE,
-  //   requiresAuthentication: true,
-  //   apiToSchemaMapper: (result) => ({
-  //     'id': result.id,
-  //     'objnr_vor': result.objnr_vor,
-  //     'objnr_leverancier': result.objnr_leverancier,
-  //     'meetlocatie_id': result.meetlocatie.id,
-  //     'meetlocatie_naam': result.meetlocatie.name,
-  //     'latitude': result.latitude,
-  //     'longitude': result.longitude,
-  //     'snelheids_categorie': result.snelheids_categorie
-  //   })
-  // },
   [lengteIntervalTable.id]: {
     endPoint: tellusApiRoot + 'lengte_interval/',
     paginationType: PAGINATION_TYPE.PAGE,
@@ -115,55 +97,6 @@ const scraperMapping = {
       'validatie_categorie_id': result.validatie_categorie,
     })
   },
-  [tellingYMHTable.id]: {
-    endPoint: tellusApiRoot + 'telling_totaal_ymh/',
-    paginationType: PAGINATION_TYPE.PAGE,
-    requiresAuthentication: true,
-    apiToSchemaMapper: (result) => ({
-      'id': result.id,
-      'tel_richting_id': result.tel_richting,
-      'jaar': result.year,
-      'maand': result.month,
-      'uur': result.hour,
-      'dag_type': result.dag_type,
-      'aantal': result.aantal,
-      'aantal_dagen': result.aantal_dagen,
-    })
-  },
-  [tellingYMHLengthTable.id]: {
-    endPoint: tellusApiRoot + 'telling_totaal_ymh_lengte/',
-    paginationType: PAGINATION_TYPE.PAGE,
-    requiresAuthentication: true,
-    apiToSchemaMapper: (result) => ({
-      'id': result.id,
-      'tel_richting_id': result.tel_richting,
-      'jaar': result.year,
-      'maand': result.month,
-      'uur': result.hour,
-      'dag_type': result.dag_type,
-      'aantal': result.aantal,
-      'aantal_dagen': result.aantal_dagen,
-      'lengte_interval_id': result.lengte_interval_id,
-      'lengte_label': result.lengte_label,
-    })
-  },
-  [tellingYMHSpeedTable.id]: {
-    endPoint: tellusApiRoot + 'telling_totaal_ymh_snelheid/',
-    paginationType: PAGINATION_TYPE.PAGE,
-    requiresAuthentication: true,
-    apiToSchemaMapper: (result) => ({
-      'id': result.id,
-      'tel_richting_id': result.tel_richting,
-      'jaar': result.year,
-      'maand': result.month,
-      'uur': result.hour,
-      'dag_type': result.dag_type,
-      'aantal': result.aantal,
-      'aantal_dagen': result.aantal_dagen,
-      'snelheids_interval_id': result.snelheids_interval_id,
-      'snelheids_label': result.snelheids_label,
-    })
-  }
 };
 
 const scraperOptions = {
