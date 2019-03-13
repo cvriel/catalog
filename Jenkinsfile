@@ -24,8 +24,7 @@ node {
 
     stage("Test") {
         tryStep "test", {
-            sh "docker-compose -p catalog -f docker-compose.yml build && " +
-                    "docker-compose -p catalog -f docker-compose.yml run --rm test"
+            sh "deploy/jenkins-test.sh deploy/"
         }
     }
 
