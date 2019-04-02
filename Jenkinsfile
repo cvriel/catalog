@@ -22,6 +22,11 @@ node {
         checkout scm
     }
 
+    stage("Test") {
+        tryStep "test", {
+            sh "deploy/jenkins-test.sh ."
+        }
+    }
 
     stage("Build image") {
         tryStep "build", {
