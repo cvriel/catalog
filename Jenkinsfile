@@ -30,14 +30,11 @@ node {
 
     stage("Build image") {
         tryStep "build", {
-            docker.withRegistry('https://repo.data.amsterdam.nl','docker-registry') {
-                def image = docker.build("datapunt/catalog:${env.BUILD_NUMBER}", "--build-arg http_proxy=${JENKINS_HTTP_PROXY_STRING} --build-arg https_proxy=${JENKINS_HTTP_PROXY_STRING} .")
-                image.push()
-            }
+            def image = docker.build("build.datapunt.amsterdam.nl:5000/datapunt/catalog:${env.BUILD_NUMBER}")
+            image.push()
         }
     }
 }
-
 
 String BRANCH = "${env.BRANCH_NAME}"
 
@@ -46,11 +43,9 @@ if (BRANCH == "master") {
     node {
         stage('Push acceptance image') {
             tryStep "image tagging", {
-                docker.withRegistry('https://repo.data.amsterdam.nl','docker-registry') {
-                    def image = docker.image("datapunt/catalog:${env.BUILD_NUMBER}")
-                    image.pull()
-                    image.push("acceptance")
-                }
+                def image = docker.image("build.datapunt.amsterdam.nl:5000/datapunt/catalog:${env.BUILD_NUMBER}")
+                image.pull()
+                image.push("acceptance")
             }
         }
     }
@@ -67,6 +62,7 @@ if (BRANCH == "master") {
         }
     }
 
+
     stage('Waiting for approval') {
         slackSend channel: '#ci-channel', color: 'warning', message: 'Catalog is waiting for Production Release - please confirm'
         input "Deploy to Production?"
@@ -75,12 +71,10 @@ if (BRANCH == "master") {
     node {
         stage('Push production image') {
         tryStep "image tagging", {
-            docker.withRegistry('https://repo.data.amsterdam.nl','docker-registry') {
-                def image = docker.image("datapunt/catalog:${env.BUILD_NUMBER}")
-                    image.pull()
-                    image.push("production")
-                    image.push("latest")
-                }
+            def image = docker.image("build.datapunt.amsterdam.nl:5000/datapunt/catalog:${env.BUILD_NUMBER}")
+            image.pull()
+                image.push("production")
+                image.push("latest")
             }
         }
     }
