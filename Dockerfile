@@ -1,6 +1,6 @@
 # Build
 FROM node:10.15.0 AS build-deps
-MAINTAINER datapunt.ois@amsterdam.nl
+LABEL MAINTAINER="datapunt.ois@amsterdam.nl"
 
 COPY src/webconnector/package*.json /build/webconnector/
 WORKDIR /build/webconnector
@@ -13,7 +13,7 @@ COPY /deploy /deploy
 
 # webserver image.
 FROM nginx:1.15.7
-MAINTAINER datapunt.ois@amsterdam.nl
+LABEL MAINTAINER="datapunt.ois@amsterdam.nl"
 
 ENV BASE_URL=https://api.data.amsterdam.nl/
 COPY cmd.sh /usr/local/bin/
