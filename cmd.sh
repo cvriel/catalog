@@ -1,9 +1,18 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 set -u
 
-echo "Converting %BASE_URL% to ${BASE_URL}" 
+
+if [[ ${BASE_URL} =~ "acc" ]];
+then
+    echo "Converting map.data.amsterdam.nl to acc.map.data.amsterdam.nl"
+    sed -i -e"s;map.data.amsterdam.nl;acc.map.data.amsterdam.nl;" /usr/share/nginx/html/index.html
+    echo "Converting t1.data.amsterdam.nl to acc.t1.map.data.amsterdam.nl"
+    sed -i -e"s;t1.data.amsterdam.nl;acc.t1.data.amsterdam.nl;" /usr/share/nginx/html/index.html
+fi
+
+echo "Converting %BASE_URL% to ${BASE_URL}"
 sed -i -e"s;%BASE_URL%;${BASE_URL};" /usr/share/nginx/html/index.html
 
 echo "Starting Nginx"
