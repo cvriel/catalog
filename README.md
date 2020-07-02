@@ -12,7 +12,7 @@ The `/src` folder is build and the compiled output is copied to the web server.
 
 ## Webconnector
 
-For information on how to run the Web Data Connectors see:
+For information on how to run the Web Data Connectors see: update
 `src/webconnector/README.md`
 
 ## Testing
